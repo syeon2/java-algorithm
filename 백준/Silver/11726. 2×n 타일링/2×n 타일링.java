@@ -13,15 +13,15 @@ public class Main {
 		dp = new int[N + 1];
 
 		// bottom-up
-		// for (int i = 1; i <= N; i++) {
-		// 	if (i == 1) dp[1] = 1;
-		// 	else if (i == 2) dp[2] = 2;
-		// 	else dp[i] = (dp[i - 1] + dp[i - 2]) % MOD;
-		// }
+		for (int i = 1; i <= N; i++) {
+			if (i == 1) dp[1] = 1;
+			else if (i == 2) dp[2] = 2;
+			else dp[i] = (dp[i - 1] + dp[i - 2]) % MOD;
+		}
 
-		int answer = topDown(N);
+		// int answer = topDown(N);
 
-		bw.write(String.valueOf(answer));
+		bw.write(String.valueOf(dp[N]));
 		bw.flush();
 		bw.close();
 	}
