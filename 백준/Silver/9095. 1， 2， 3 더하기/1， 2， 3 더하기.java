@@ -11,14 +11,14 @@ public class Main {
 		int T = Integer.parseInt(br.readLine());
 
 		// bottom-up
-		// for (int i = 1; i < 11; i++) {
-		// 	if (i == 1) dp[1] = 1;
-		// 	else if (i == 2) dp[2] = 2;
-		// 	else if (i == 3) dp[3] = 4;
-		// 	else dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
-		// }
+		for (int i = 1; i < 11; i++) {
+			if (i == 1) dp[1] = 1;
+			else if (i == 2) dp[2] = 2;
+			else if (i == 3) dp[3] = 4;
+			else dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+		}
 
-		topDown(10);
+		// topDown(10);
 
 		for (int i = 0; i < T; i++) {
 			int N = Integer.parseInt(br.readLine());
