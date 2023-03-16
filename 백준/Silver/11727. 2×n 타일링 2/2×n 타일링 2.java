@@ -12,15 +12,16 @@ public class Main {
 		int N = Integer.parseInt(br.readLine());
 		dp = new int[N + 1];
 
-		// for (int i = 1; i <= N; i++) {
-		// 	if (i == 1) dp[i] = 1;
-		// 	else if (i == 2) dp[i] = 3;
-		// 	else dp[i] = (dp[i - 1] + (dp[i - 2] * 2)) % MOD;
-		// }
+		// bottom-up
+		for (int i = 1; i <= N; i++) {
+			if (i == 1) dp[i] = 1;
+			else if (i == 2) dp[i] = 3;
+			else dp[i] = (dp[i - 1] + (dp[i - 2] * 2)) % MOD;
+		}
 
-		int answer = topDown(N);
+		// int answer = topDown(N);
 
-		bw.write(String.valueOf(answer));
+		bw.write(String.valueOf(dp[N]));
 		bw.flush();
 		bw.close();
 	}
