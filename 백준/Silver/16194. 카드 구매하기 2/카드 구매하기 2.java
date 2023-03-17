@@ -20,17 +20,17 @@ public class Main {
 		}
 
 		// bottom-up
-		// for (int i = 1; i <= N; i++) {
-		// 	dp[i] = list[i];
-		//
-		// 	for (int k = 1; k <= i / 2; k++) {
-		// 		dp[i] = Math.min(dp[i], dp[k] + dp[i - k]);
-		// 	}
-		// }
+		for (int i = 1; i <= N; i++) {
+			dp[i] = list[i];
 
-		int answer = topDown(N);
+			for (int k = 1; k <= i / 2; k++) {
+				dp[i] = Math.min(dp[i], dp[k] + dp[i - k]);
+			}
+		}
 
-		bw.write(String.valueOf(answer));
+		// int answer = topDown(N);
+
+		bw.write(String.valueOf(dp[N]));
 		bw.flush();
 		bw.close();
 	}
