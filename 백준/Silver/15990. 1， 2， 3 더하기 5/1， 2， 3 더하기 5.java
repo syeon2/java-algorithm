@@ -10,29 +10,32 @@ public class Main {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
 
-		// for (int i = 1; i <= 100000; i++) {
-		// 	if (i == 1) dp[i][0] = 1;
-		// 	else if (i == 2) dp[i][1] = 1;
-		// 	else if (i == 3) dp[i][0] = dp[i][1] = dp[i][2] = 1;
-		// 	else {
-		// 		dp[i][0] = (dp[i - 1][1] + dp[i - 1][2]) % MOD;
-		// 		dp[i][1] = (dp[i - 2][0] + dp[i - 2][2]) % MOD;
-		// 		dp[i][2] = (dp[i - 3][0] + dp[i - 3][1]) % MOD;
-		// 	}
-		// }
+		// bottom-up
+		for (int i = 1; i <= 100000; i++) {
+			if (i == 1) dp[i][0] = 1;
+			else if (i == 2) dp[i][1] = 1;
+			else if (i == 3) dp[i][0] = dp[i][1] = dp[i][2] = 1;
+			else {
+				dp[i][0] = (dp[i - 1][1] + dp[i - 1][2]) % MOD;
+				dp[i][1] = (dp[i - 2][0] + dp[i - 2][2]) % MOD;
+				dp[i][2] = (dp[i - 3][0] + dp[i - 3][1]) % MOD;
+			}
+		}
 
-		dp[1][0] = 1;
-		dp[2][1] = 1;
-		dp[3][0] = dp[3][1] = dp[3][2] = 1;
+		// top-down
+		// dp[1][0] = 1;
+		// dp[2][1] = 1;
+		// dp[3][0] = dp[3][1] = dp[3][2] = 1;
 
 		int T = Integer.parseInt(br.readLine());
 
 		for (int t = 0; t < T; t++) {
 			int N = Integer.parseInt(br.readLine());
 
-			for (int i = 0; i < 3; i++) {
-				topDown(N, i);
-			}
+			// top-down
+			// for (int i = 0; i < 3; i++) {
+			// 	topDown(N, i);
+			// }
 
 			int answer = 0;
 			for (int i = 0; i < 3; i++) {
