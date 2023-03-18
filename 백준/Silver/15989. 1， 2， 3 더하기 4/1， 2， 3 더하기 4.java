@@ -10,18 +10,18 @@ public class Main {
 		StringBuilder sb = new StringBuilder();
 
 		// bottom-up
-		for (int i = 1; i <= 10000; i++) {
-			if (i < 4) dp[i] = i;
-			else dp[i] = 1 + (i / 2) + dp[i - 3];
-		}
-
-		// top-down
-		// topDown(10000);
+		// for (int i = 1; i <= 10000; i++) {
+		// 	if (i < 4) dp[i] = i;
+		// 	else dp[i] = 1 + (i / 2) + dp[i - 3];
+		// }
 
 		int T = Integer.parseInt(br.readLine());
 
 		for (int t = 0; t < T; t++) {
 			int N = Integer.parseInt(br.readLine());
+
+			// top-down
+			topDown(N);
 
 			sb.append(dp[N]).append("\n");
 		}
