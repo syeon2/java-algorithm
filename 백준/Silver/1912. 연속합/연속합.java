@@ -20,14 +20,14 @@ public class Main {
 		}
 
 		// bottom-up
-		// for (int i = 0; i < N; i++) {
-		// 	if (i == 0) dp[i] = list[i];
-		// 	else {
-		// 		dp[i] = Math.max(list[i], dp[i - 1] + list[i]);
-		// 	}
-		// }
+		for (int i = 0; i < N; i++) {
+			if (i == 0) dp[i] = list[i];
+			else {
+				dp[i] = Math.max(list[i], dp[i - 1] + list[i]);
+			}
+		}
 
-		topDown(N - 1);
+		// topDown(N - 1);
 
 		int answer = dp[0];
 		for (int i = 0; i < N; i++) {
