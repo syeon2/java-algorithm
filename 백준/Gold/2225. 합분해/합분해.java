@@ -18,8 +18,8 @@ public class Main {
 		dp = new int[K + 1][N + 1];
 
 		// bottom-up
-		Arrays.fill(dp[1], 1);
-		for (int k = 2; k <= K; k++) {
+		dp[0][0] = 1;
+		for (int k = 1; k <= K; k++) {
 			for (int n = 0; n <= N; n++) {
 				if (n == 0) dp[k][n] = 1;
 				else {
