@@ -17,20 +17,20 @@ public class Main {
 
 		dp = new int[K + 1][N + 1];
 
-		// Arrays.fill(dp[1], 1);
+		// bottom-up
+		Arrays.fill(dp[1], 1);
+		for (int k = 2; k <= K; k++) {
+			for (int n = 0; n <= N; n++) {
+				if (n == 0) dp[k][n] = 1;
+				else {
+					dp[k][n] = (dp[k - 1][n] + dp[k][n - 1]) % MOD;
+				}
+			}
+		}
 
-		// for (int k = 2; k <= K; k++) {
-		// 	for (int n = 0; n <= N; n++) {
-		// 		if (n == 0) dp[k][n] = 1;
-		// 		else {
-		// 			dp[k][n] = (dp[k - 1][n] + dp[k][n - 1]) % MOD;
-		// 		}
-		// 	}
-		// }
+		// int answer = topDown(N, K);
 
-		int answer = topDown(N, K);
-
-		bw.write(String.valueOf(answer));
+		bw.write(String.valueOf(dp[K][N]));
 		bw.flush();
 		bw.close();
 	}
