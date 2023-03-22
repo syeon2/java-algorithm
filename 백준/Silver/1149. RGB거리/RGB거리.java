@@ -24,21 +24,21 @@ public class Main {
 		}
 
 		// bottom-up
-		// for (int i = 0; i < N; i++) {
-		// 	if (i == 0) {
-		// 		for (int k = 0; k < 3; k++) {
-		// 			dp[i][k] = list[i][k];
-		// 		}
-		// 	} else {
-		// 		dp[i][0] = Math.min(dp[i - 1][1], dp[i - 1][2]) + list[i][0];
-		// 		dp[i][1] = Math.min(dp[i - 1][0], dp[i - 1][2]) + list[i][1];
-		// 		dp[i][2] = Math.min(dp[i - 1][0], dp[i - 1][1]) + list[i][2];
-		// 	}
-		// }
-
-		for (int i = 0; i < 3; i++) {
-			topDown(N - 1, i);
+		for (int i = 0; i < N; i++) {
+			if (i == 0) {
+				for (int k = 0; k < 3; k++) {
+					dp[i][k] = list[i][k];
+				}
+			} else {
+				dp[i][0] = Math.min(dp[i - 1][1], dp[i - 1][2]) + list[i][0];
+				dp[i][1] = Math.min(dp[i - 1][0], dp[i - 1][2]) + list[i][1];
+				dp[i][2] = Math.min(dp[i - 1][0], dp[i - 1][1]) + list[i][2];
+			}
 		}
+
+		// for (int i = 0; i < 3; i++) {
+		// 	topDown(N - 1, i);
+		// }
 
 		int answer = Integer.MAX_VALUE;
 		for (int i = 0; i < 3; i++) {
