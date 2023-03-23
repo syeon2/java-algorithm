@@ -14,22 +14,22 @@ public class Main {
 		dp = new int[N + 1][10];
 
 		// bottom-up
-		// Arrays.fill(dp[1], 1);
-		// for (int i = 2; i <= N; i++) {
-		// 	for (int k = 0; k < 10; k++) {
-		// 		for (int l = 0; l <= k; l++) {
-		// 			dp[i][k] += dp[i - 1][l];
-		// 			dp[i][k] %= MOD;
-		// 		}
-		// 	}
-		// }
-
-		// top-down
-		for (int i = 1; i <= N; i++) {
+		Arrays.fill(dp[1], 1);
+		for (int i = 2; i <= N; i++) {
 			for (int k = 0; k < 10; k++) {
-				topDown(i, k);
+				for (int l = 0; l <= k; l++) {
+					dp[i][k] += dp[i - 1][l];
+					dp[i][k] %= MOD;
+				}
 			}
 		}
+
+		// top-down
+		// for (int i = 1; i <= N; i++) {
+		// 	for (int k = 0; k < 10; k++) {
+		// 		topDown(i, k);
+		// 	}
+		// }
 
 		int answer = 0;
 		for (int i = 0; i < 10; i++) {
