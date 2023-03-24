@@ -19,14 +19,14 @@ public class Main {
 		}
 
 		// bottom-up
-		// dp[1] = list[1];
-		// if (N > 1) dp[2] = list[1] + list[2];
-		//
-		// for (int i = 3; i <= N; i++) {
-		// 	dp[i] = Math.max(dp[i - 1], Math.max(dp[i - 2], dp[i - 3] + list[i - 1]) + list[i]);
-		// }
+		dp[1] = list[1];
+		if (N > 1) dp[2] = list[1] + list[2];
 
-		topDown(N);
+		for (int i = 3; i <= N; i++) {
+			dp[i] = Math.max(dp[i - 1], Math.max(dp[i - 2], dp[i - 3] + list[i - 1]) + list[i]);
+		}
+
+		// topDown(N);
 
 		int answer = 0;
 		for (int i = 1; i <= N; i++) {
