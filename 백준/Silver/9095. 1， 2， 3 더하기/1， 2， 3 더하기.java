@@ -1,45 +1,48 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
 
 public class Main {
 
 	static int[] dp = new int[11];
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
 
-		int T = Integer.parseInt(br.readLine());
+		// for (int i = 1; i <= 10; i++) {
+		// 	if (i == 1) dp[i] = 1;
+		// 	else if (i == 2) dp[i] = 2;
+		// 	else if (i == 3) dp[i] = 4;
+		// 	else dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+		// }
 
-		// bottom-up
-		for (int i = 1; i < 11; i++) {
-			if (i == 1) dp[1] = 1;
-			else if (i == 2) dp[2] = 2;
-			else if (i == 3) dp[3] = 4;
-			else dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
-		}
 
-		// topDown(10);
+        int T = Integer.parseInt(br.readLine());
 
-		for (int i = 0; i < T; i++) {
+		for (int t = 0; t < T; t++) {
 			int N = Integer.parseInt(br.readLine());
 
-			sb.append(dp[N]).append("\n");
+			sb.append(topDown(N)).append("\n");
 		}
 
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-	}
+    }
 
-	private static int topDown(int N) {
-		if (N == 1) return dp[N] = 1;
-		else if (N == 2) return dp[N] = 2;
-		else if (N == 3) return dp[N] = 4;
+	public static int topDown(int n) {
+		if (n == 1) return dp[n] = 1;
+		else if (n == 2) return dp[n] = 2;
+		else if (n == 3) return dp[n] = 4;
 
-		if (dp[N] == 0) {
-			dp[N] = topDown(N - 1) + topDown(N - 2) + topDown(N - 3);
+		if (dp[n] == 0) {
+			dp[n] = topDown(n - 1) + topDown(n - 2) + topDown(n - 3);
 		}
 
-		return dp[N];
+		return dp[n];
 	}
 }
