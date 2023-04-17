@@ -1,29 +1,34 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class Main {
 
-	static int[] list;
+	static int[] nList;
 	static int[] dp;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int N = Integer.parseInt(br.readLine());
-		list = new int[N + 1];
+        int N = Integer.parseInt(br.readLine());
+		nList = new int[N + 1];
 		dp = new int[N + 1];
 
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 1; i <= N; i++) {
-			list[i] = Integer.parseInt(st.nextToken());
+			nList[i] = Integer.parseInt(st.nextToken());
 		}
-		//
+
+		// bottom-up
 		// for (int i = 1; i <= N; i++) {
-		// 	dp[i] = list[i];
+		// 	dp[i] = nList[i];
 		//
 		// 	for (int k = 1; k < i; k++) {
-		// 		if (list[i] > list[k]) dp[i] = Math.max(dp[i], dp[k] + list[i]);
+		// 		if (nList[i] > nList[k]) dp[i] = Math.max(dp[i], dp[k] + nList[i]);
 		// 	}
 		// }
 
@@ -39,16 +44,16 @@ public class Main {
 		bw.write(String.valueOf(answer));
 		bw.flush();
 		bw.close();
-	}
+    }
 
 	public static int topDown(int n) {
-		if (n == 1) return dp[n] = list[n];
+		if (n == 1) return dp[n] = nList[n];
 
 		if (dp[n] == 0) {
-			dp[n] = list[n];
+			dp[n] = nList[n];
 
 			for (int i = 1; i < n; i++) {
-				if (list[n] > list[i]) dp[n] = Math.max(dp[n], topDown(i) + list[n]);
+				if (nList[n] > nList[i]) dp[n] = Math.max(dp[n], topDown(i) + nList[n]);
 			}
 		}
 
