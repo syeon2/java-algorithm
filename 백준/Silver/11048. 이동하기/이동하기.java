@@ -1,67 +1,59 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class Main {
 
-	static int[][] list;
+	static int[][] board;
 	static int[][] dp;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int M = Integer.parseInt(st.nextToken());
 		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
 
-		list = new int[M][N];
-		dp = new int[M][N];
+		board = new int[N + 1][M + 1];
+		dp = new int[N + 1][M + 1];
 
-		for (int i = 0; i < M; i++) {
+		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
 
-			for (int k = 0; k < N; k++) {
-				list[i][k] = Integer.parseInt(st.nextToken());
+			for (int k = 1; k <= M; k++) {
+				board[i][k] = Integer.parseInt(st.nextToken());
 				dp[i][k] = -1;
 			}
 		}
 
 		// bottom-up
-		// dp[0][0] = list[0][0];
-		// for (int i = 0; i < M; i++) {
+		// for (int i = 1; i <= N; i++) {
 		//
-		// 	for (int k = 0; k < N; k++) {
-		// 		if (i == 0 && k == 0) continue;
-		// 		else if (i == 0) dp[i][k] = dp[i][k - 1] + list[i][k];
-		// 		else if (k == 0) dp[i][k] = dp[i - 1][k] + list[i][k];
-		// 		else {
-		// 			dp[i][k] = Math.max(dp[i - 1][k], Math.max(dp[i][k - 1], dp[i - 1][k - 1])) + list[i][k];
-		// 		}
+		// 	for (int k = 1; k <= M; k++) {
+		// 		dp[i][k] = Math.max(dp[i - 1][k],
+		// 			Math.max(dp[i][k - 1], dp[i - 1][k - 1])) + board[i][k];
 		// 	}
 		// }
 
-		// top-down
-		int answer = topDown(M - 1, N - 1);
+		int answer = topDown(N, M);
 
-
-		// bw.write(String.valueOf(dp[M - 1][N - 1]));
 		bw.write(String.valueOf(answer));
 		bw.flush();
 		bw.close();
-	}
+    }
 
-	public static int topDown(int M, int N) {
-		if (N == 0 && M == 0) return dp[M][N] = list[M][N];
+	public static int topDown(int n, int m) {
+		if (n == 0 || m == 0) return dp[n][m] = board[n][m];
 
-		if (dp[M][N] == -1) {
-			if (M == 0) dp[M][N] = topDown(M, N - 1) + list[M][N];
-			else if (N == 0) dp[M][N] = topDown(M - 1, N) + list[M][N];
-			else {
-				dp[M][N] = Math.max(topDown(M - 1, N - 1),
-					Math.max(topDown(M - 1, N), topDown(M, N - 1))) + list[M][N];
-			}
+		if (dp[n][m] == -1) {
+			dp[n][m] = Math.max(topDown(n - 1, m),
+				Math.max(topDown(n, m - 1), topDown(n - 1, m - 1))) + board[n][m];
 		}
 
-		return dp[M][N];
+		return dp[n][m];
 	}
 }
