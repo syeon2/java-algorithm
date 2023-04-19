@@ -25,12 +25,15 @@ public class Main {
 		}
 
 		// bottom-up
-		dp[1] = 0;
+		// dp[1] = 0;
+		// for (int i = 1; i <= N; i++) {
+		//
+		// 	for (int k = 1; k < i; k++) {
+		// 		if (k + nList[k] >= i && dp[k] != 10000) dp[i] = Math.min(dp[i], dp[k] + 1);
+		// 	}
+		// }
 		for (int i = 1; i <= N; i++) {
-
-			for (int k = 1; k < i; k++) {
-				if (k + nList[k] >= i && dp[k] != 10000) dp[i] = Math.min(dp[i], dp[k] + 1);
-			}
+			topDown(i);
 		}
 
 		int answer = dp[N];
@@ -40,4 +43,16 @@ public class Main {
 		bw.flush();
 		bw.close();
     }
+
+	public static int topDown(int n) {
+		if (n == 1) return dp[1] = 0;
+
+		if (dp[n] == 10000 && nList[n] != 0) {
+			for (int i = 1; i < n; i++) {
+				if (i + nList[i] >= n && dp[i] != 10000) dp[n] = Math.min(dp[n], topDown(i) + 1);
+			}
+		}
+
+		return dp[n];
+	}
 }
