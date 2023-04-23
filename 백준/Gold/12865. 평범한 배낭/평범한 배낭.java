@@ -1,21 +1,25 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class Main {
 
-	static long[][] dp;
+	static int[][] dp;
 	static int[] wList;
 	static int[] vList;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		int N = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
 
-		dp = new long[N + 1][K + 1];
+		dp = new int[N + 1][K + 1];
 		wList = new int[N + 1];
 		vList = new int[N + 1];
 
@@ -26,7 +30,7 @@ public class Main {
 			vList[i] = Integer.parseInt(st.nextToken());
 		}
 
-
+		// bottom-up
 		for (int n = 1; n <= N; n++) {
 
 			for (int k = 1; k <= K; k++) {
@@ -35,8 +39,13 @@ public class Main {
 			}
 		}
 
-		bw.write(String.valueOf(dp[N][K]));
+		int answer = dp[N][1];
+		for (int i = 1; i <= K; i++) {
+			answer = Math.max(answer, dp[N][i]);
+		}
+
+		bw.write(String.valueOf(answer));
 		bw.flush();
 		bw.close();
-	}
+    }
 }
