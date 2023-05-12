@@ -3,50 +3,38 @@ import java.io.InputStreamReader;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
 
-		List<Integer> list = new ArrayList<>();
-        int[] nList = new int[9];
 		int total = 0;
-
+        int[] list = new int[9];
 		for (int i = 0; i < 9; i++) {
-			nList[i] = Integer.parseInt(br.readLine());
-			total += nList[i];
+			int num = Integer.parseInt(br.readLine());
+			list[i] = num;
+			total += num;
 		}
+		Arrays.sort(list);
 
 		for (int i = 0; i < 9; i++) {
-			boolean find = false;
-
 			for (int k = i + 1; k < 9; k++) {
-				if (total - nList[i] - nList[k] == 100) {
-					find = true;
-
+				if (total - list[i] - list[k] == 100) {
 					for (int l = 0; l < 9; l++) {
-						if (l != i && l != k) {
-							list.add(nList[l]);
-						}
+						if (l == i || l == k) continue;
+
+						sb.append(list[l]).append("\n");
 					}
+
+					bw.write(sb.toString());
+					bw.flush();
+					bw.close();
+					return;
 				}
 			}
-
-			if (find) break;
 		}
-
-		Collections.sort(list);
-
-		for (int i = 0; i < list.size(); i++) {
-			bw.write(String.valueOf(list.get(i)));
-			bw.newLine();
-		}
-
-		bw.flush();
-		bw.close();
     }
 }
