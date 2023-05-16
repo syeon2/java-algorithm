@@ -8,46 +8,49 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	static int[] nList;
+	static int[] pos;
 	static StringBuilder sb = new StringBuilder();
 
-	static int[] list = new int[10];
-	static int[] nList;
-
     public static void main(String[] args) throws IOException {
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 
-		nList = new int[N + 1];
+		nList = new int[N];
+		pos = new int[M];
+
 		st = new StringTokenizer(br.readLine(), " ");
-		for (int i = 1; i <= N; i++) {
+		for (int i = 0; i < N; i++) {
 			nList[i] = Integer.parseInt(st.nextToken());
 		}
+
 		Arrays.sort(nList);
 
-		recur(1, N, M);
+		backtracking(0, N, M);
 
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
     }
 
-	public static void recur(int index, int n, int m) {
-		if (index > m) {
-			for (int i = 1; i <= m; i++) {
-				sb.append(list[i]).append(" ");
+	private static void backtracking(int idx, int n, int m) {
+		if (idx == m) {
+			for (int i = 0; i < m; i++) {
+				sb.append(pos[i]).append(" ");
 			}
 			sb.append("\n");
 			return;
 		}
 
-		for (int i = 1; i <= n; i++) {
-			list[index] = nList[i];
-			if (list[index - 1] > list[index]) continue;
-			recur(index + 1, n, m);
+		for (int i = 0; i < n; i++) {
+			if (idx != 0 && pos[idx - 1] > nList[i]) continue;
+
+			pos[idx] = nList[i];
+			backtracking(idx + 1, n, m);
 		}
 	}
 }
