@@ -7,37 +7,39 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	static int[] iList;
 	static StringBuilder sb = new StringBuilder();
 
-	static int[] list = new int[10];
-
     public static void main(String[] args) throws IOException {
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 
-		recur(1, N, M);
+		iList = new int[M + 1];
+
+		backtracking(1, N, M);
 
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
     }
 
-	public static void recur(int index, int n, int m) {
+	private static void backtracking(int index, int n, int m) {
 		if (index > m) {
 			for (int i = 1; i <= m; i++) {
-				sb.append(list[i]).append(" ");
+				sb.append(iList[i]).append(" ");
 			}
+
 			sb.append("\n");
 			return;
 		}
 
 		for (int i = 1; i <= n; i++) {
-			list[index] = i;
-			recur(index + 1, n, m);
+			iList[index] = i;
+			backtracking(index + 1, n, m);
 		}
 	}
 }
