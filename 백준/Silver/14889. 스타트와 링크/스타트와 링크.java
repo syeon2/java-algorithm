@@ -27,42 +27,28 @@ public class Main {
             }
         }
 
-        getAnswer(0, N);
+        getAnswer(0, N, 0);
 
         bw.write(String.valueOf(answer));
         bw.flush();
         bw.close();
     }
 
-    private static void getAnswer(int idx, int n) {
-        if (idx == n) {
-            int count = 0;
-            for (int i = 0; i < n; i++) {
-                if (check[i]) count++;
-            }
-
-            if (count != n / 2) return;
-
+    private static void getAnswer(int idx, int n, int count) {
+        if (count == n / 2) {
             int teamA = 0;
             int teamB = 0;
 
-            for (int i = 0; i < n; i++) {
-
-                if (check[i]) continue;
-                for (int k = 0; k < n; k++) {
-                    if (i == k || check[k]) continue;
-
-                    teamA += list[i][k];
-                }
-            }
-
-            for (int i = 0; i < n; i++) {
-
-                if (!check[i]) continue;
-                for (int k = 0; k < n; k++) {
-                    if (i == k || !check[k]) continue;
-
-                    teamB += list[i][k];
+            for (int i = 0; i < n - 1; i++) {
+                for (int k = i + 1; k < n; k++) {
+                    if (check[i] && check[k]) {
+                        teamA += list[i][k];
+                        teamA += list[k][i];
+                    }
+                    else if (!check[i] && !check[k]) {
+                        teamB += list[i][k];
+                        teamB += list[k][i];
+                    }
                 }
             }
 
@@ -70,9 +56,12 @@ public class Main {
             return;
         }
 
-        getAnswer(idx + 1, n);
-        check[idx] = true;
-        getAnswer(idx + 1, n);
-        check[idx] = false;
+        for (int i = idx; i < n; i++) {
+            if (check[i]) continue;
+
+            check[idx] = true;
+            getAnswer(i + 1, n, count + 1);
+            check[idx] = false;
+        }
     }
 }
