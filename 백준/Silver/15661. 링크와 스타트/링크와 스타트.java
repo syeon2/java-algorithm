@@ -39,23 +39,16 @@ public class Main {
             int teamA = 0;
             int teamB = 0;
 
-            for (int i = 0; i < n; i++) {
-
-                if (check[i]) continue;
-                for (int k = 0; k < n; k++) {
-                    if (i == k || check[k]) continue;
-
-                    teamA += list[i][k];
-                }
-            }
-
-            for (int i = 0; i < n; i++) {
-
-                if (!check[i]) continue;
-                for (int k = 0; k < n; k++) {
-                    if (i == k || !check[k]) continue;
-
-                    teamB += list[i][k];
+            for (int i = 0; i < n - 1; i++) {
+                for (int k = i + 1; k < n; k++) {
+                    if (check[i] && check[k]) {
+                        teamA += list[i][k];
+                        teamA += list[k][i];
+                    }
+                    else if (!check[i] && !check[k]) {
+                        teamB += list[i][k];
+                        teamB += list[k][i];
+                    }
                 }
             }
 
