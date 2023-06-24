@@ -7,33 +7,35 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static int[] nList;
+	static int[] list;
 	static int[] dp;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = Integer.parseInt(br.readLine());
-		nList = new int[N + 1];
+		int N = Integer.parseInt(br.readLine());
+		list = new int[N + 1];
 		dp = new int[N + 1];
 
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 1; i <= N; i++) {
-			nList[i] = Integer.parseInt(st.nextToken());
+			list[i] = Integer.parseInt(st.nextToken());
 		}
 
-		// bottom-up
-		// for (int i = 1; i <= N; i++) {
-		// 	dp[i] = nList[i];
-		//
-		// 	for (int k = 1; k < i; k++) {
-		// 		if (nList[i] > nList[k]) dp[i] = Math.max(dp[i], dp[k] + nList[i]);
-		// 	}
-		// }
+		// 점화식
+		// D[N] = max(D[I] + list[N]), I > 0, I < N
 
+		// bottom-up
 		for (int i = 1; i <= N; i++) {
-			topDown(i);
+
+			dp[i] = list[i];
+
+			for (int k = 1; k < i; k++) {
+				if (list[i] > list[k]) {
+					dp[i] = Math.max(dp[i], dp[k] + list[i]);
+				}
+			}
 		}
 
 		int answer = 0;
@@ -45,18 +47,4 @@ public class Main {
 		bw.flush();
 		bw.close();
     }
-
-	public static int topDown(int n) {
-		if (n == 1) return dp[n] = nList[n];
-
-		if (dp[n] == 0) {
-			dp[n] = nList[n];
-
-			for (int i = 1; i < n; i++) {
-				if (nList[n] > nList[i]) dp[n] = Math.max(dp[n], topDown(i) + nList[n]);
-			}
-		}
-
-		return dp[n];
-	}
 }
