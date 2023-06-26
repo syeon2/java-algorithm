@@ -6,6 +6,12 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class Main {
+
+	static int answer = 1;
+	static int EMax = 15;
+	static int SMax = 28;
+	static int MMax = 19;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -20,20 +26,26 @@ public class Main {
 		int m = 1;
 
 		int answer = 1;
+		while (!(e == E && s == S && m == M)) {
+			if (e == EMax) {
+				e = 1;
+			} else {
+				e += 1;
+			}
 
-		while (true) {
-			if (e == E && s == S && m == M) break;
+			if (s == SMax) {
+				s = 1;
+			} else {
+				s += 1;
+			}
 
-			if (e == 15) e = 1;
-			else e += 1;
+			if (m == MMax) {
+				m = 1;
+			} else {
+				m += 1;
+			}
 
-			if (s == 28) s = 1;
-			else s += 1;
-
-			if (m == 19) m = 1;
-			else m += 1;
-
-			answer += 1;
+			answer++;
 		}
 
 		bw.write(String.valueOf(answer));
