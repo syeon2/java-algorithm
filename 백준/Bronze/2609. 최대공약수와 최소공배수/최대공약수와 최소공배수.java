@@ -14,20 +14,20 @@ public class Main {
 		int A = Integer.parseInt(st.nextToken());
 		int B = Integer.parseInt(st.nextToken());
 
-		bw.write(String.valueOf(gcm(A, B)));
+		bw.write(String.valueOf(gcd(Math.max(A, B), Math.min(A, B))));
 		bw.newLine();
-		bw.write(String.valueOf(lcm(A, B)));
-
+		bw.write(String.valueOf(lcm(Math.max(A, B), Math.min(A, B))));
 		bw.flush();
 		bw.close();
     }
 
-	public static int gcm(int a, int b) {
-		if (a % b == 0) return b;
-		else return gcm(b, a % b);
+	public static int gcd(int a, int b) {
+		if (b == 0) return a;
+		else return gcd(b, a % b);
 	}
 
-	public static int lcm(int a, int b){
-		return a * b / gcm(a, b);
+	public static int lcm(int a, int b) {
+		int gcd = gcd(a, b);
+		return (a / gcd) * (b / gcd) * gcd;
 	}
 }
