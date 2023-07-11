@@ -10,31 +10,27 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
 
-		int max = 1000001;
-		boolean[] list = new boolean[max];
+        boolean[] list = new boolean[1000001];
 
 		list[0] = list[1] = true;
-		for (int i = 2; i <= (int) Math.sqrt(max); i++) {
-
-			for (int k = i * i; k < max; k += i) {
-
-				if (list[k]) continue;
-
+		for (int i = 2; i <= 1000000; i++) {
+			for (int k = i + i; k <= 1000000; k += i) {
 				list[k] = true;
 			}
 		}
 
-		while (true) {
-			int n = Integer.parseInt(br.readLine());
-			if (n == 0) break;
+		int num = -1;
 
-			for (int i = 3; i < n; i++) {
-				if (list[i]) continue;
-				
-				if (!list[n - i]) {
-					sb.append(n).append(" = ")
-						.append(i).append(" + ")
-						.append(n - i).append("\n");
+		while ((num = Integer.parseInt(br.readLine())) != 0) {
+
+			for (int i = 3; i < num; i += 2) {
+				if (!list[i] && !list[num - i]) {
+					sb.append(num)
+						.append(" = ")
+						.append(i)
+						.append(" + ")
+						.append(num - i)
+						.append("\n");
 
 					break;
 				}
