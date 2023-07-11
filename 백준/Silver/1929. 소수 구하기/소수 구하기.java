@@ -9,32 +9,26 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
 
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int M = Integer.parseInt(st.nextToken());
-		int N = Integer.parseInt(st.nextToken());
-
-		int max = 1000001;
-		boolean[] list = new boolean[max];
+        boolean[] list = new boolean[1000001];
 
 		list[0] = list[1] = true;
-		for (int i = 2; i < (int) Math.sqrt(max); i++) {
-
-			for (int k = i * i; k < max; k += i) {
-
-				if (list[k]) continue;
-
+		for (int i = 2; i <= 1000000; i++) {
+			for (int k = i + i; k <= 1000000; k += i) {
 				list[k] = true;
 			}
 		}
 
-		for (int i = M; i <= N; i++) {
-			if (!list[i]) {
-				bw.write(String.valueOf(i));
-				bw.newLine();
-			}
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int A = Integer.parseInt(st.nextToken());
+		int B = Integer.parseInt(st.nextToken());
+
+		for (int i = A; i <= B; i++) {
+			if (!list[i]) sb.append(i).append("\n");
 		}
 
+		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
     }
