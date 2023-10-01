@@ -1,30 +1,41 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
 
-	static int[] memo;
+	static int[] dp;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(br.readLine());
+		dp = new int[N + 1];
 
-		memo = new int[N + 1];
+		// bottom-up
+		// for (int i = 2; i <= N; i++) {
+		// 	dp[i] = dp[i - 1] + 1;
+		// 	if (i % 3 == 0) dp[i] = Math.min(dp[i], dp[i / 3] + 1);
+		// 	if (i % 2 == 0) dp[i] = Math.min(dp[i], dp[i / 2] + 1);
+		// }
 
-		for (int i = 1; i <= N; i++) {
-			memo[i] = memo[i - 1] + 1;
+		int answer = topDown(N);
 
-			if (i % 3 == 0) memo[i] = Math.min(memo[i], memo[i / 3] + 1);
-			if (i % 2 == 0) memo[i] = Math.min(memo[i], memo[i / 2] + 1);
-		}
-
-		bw.write(String.valueOf(memo[N] - 1));
+		bw.write(String.valueOf(answer));
 		bw.flush();
 		bw.close();
-    }
+	}
+
+	public static int topDown(int N) {
+		if (N <= 1) return dp[N];
+
+		if (dp[N] == 0) {
+			dp[N] = N;
+
+			if (N % 3 == 0) dp[N] = Math.min(dp[N], topDown(N / 3) + 1);
+			if (N % 2 == 0) dp[N] = Math.min(dp[N], topDown(N / 2) + 1);
+			dp[N] = Math.min(dp[N], topDown(N - 1) + 1);
+		}
+
+		return dp[N];
+	}
 }
