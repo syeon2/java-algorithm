@@ -1,24 +1,17 @@
 import java.io.*;
 
-class Main {
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        String[] str = br.readLine().split(" ");
-        int a = Integer.parseInt(str[0]);
-        int b = Integer.parseInt(str[1]);
-        int c = Integer.parseInt(str[2]);
+        String[] list = br.readLine().split(" ");
+        int A = Integer.parseInt(list[0]);
+        int B = Integer.parseInt(list[1]);
+        int C = Integer.parseInt(list[2]);
         
-        bw.write(String.valueOf((a + b) % c));
-        bw.newLine();
-        bw.write(String.valueOf(((a % c) + (b % c)) % c));
-        bw.newLine();
-        bw.write(String.valueOf((a * b) % c));
-        bw.newLine();
-        bw.write(String.valueOf(((a % c) * (b % c)) % c));
-        
-        bw.flush();
-        bw.close();
+        System.out.println((A + B) % C);
+        System.out.println(((A % C) + (B % C)) % C);
+        System.out.println((A * B) % C);
+        System.out.println(((A % C) * (B % C)) % C);
     }
 }
