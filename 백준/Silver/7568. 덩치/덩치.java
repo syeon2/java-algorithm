@@ -1,52 +1,41 @@
-import java.io.*;
-import java.util.StringTokenizer;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int N = Integer.parseInt(br.readLine());
 
-		int[] weight = new int[N];
-		int[] height = new int[N];
-
-		StringTokenizer st;
-		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine());
-
-			int w = Integer.parseInt(st.nextToken());
-			int h = Integer.parseInt(st.nextToken());
-
-			weight[i] = w;
-			height[i] = h;
-		}
-
-		int[] cache = new int[N];
+		int[] w = new int[N];
+		int[] h = new int[N];
 
 		for (int i = 0; i < N; i++) {
-			int targetW = weight[i];
-			int targetH = height[i];
+			String[] info = br.readLine().split(" ");
+			int weight = Integer.parseInt(info[0]);
+			int height = Integer.parseInt(info[1]);
 
-			int order = 1;
-			for (int k = 0; k < N; k++) {
-				if (i == k) continue;
-
-				if (targetW < weight[k] && targetH < height[k]) {
-					order++;
-				}
-			}
-
-			cache[i] = order;
+			w[i] = weight;
+			h[i] = height;
 		}
 
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < cache.length; i++) {
-			sb.append(cache[i]).append(" ");
+
+		for (int i = 0; i < N; i++) {
+
+			int order = 1;
+			for (int k = 0; k < N; k++) {
+				if (i == k)
+					continue;
+
+				if (w[i] < w[k] && h[i] < h[k])
+					order++;
+			}
+
+			sb.append(order).append(" ");
 		}
 
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
+		System.out.println(sb.toString());
 	}
 }
