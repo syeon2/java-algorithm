@@ -5,9 +5,6 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         String[] str = br.readLine().split(" ");
-        int a = Integer.parseInt(str[0]);
-        int b = Integer.parseInt(str[1]);
-        
-        System.out.println((double)a / (double) b);
+        System.out.println(Double.parseDouble(str[0]) / Double.parseDouble(str[1]));
     }
 }
