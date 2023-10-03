@@ -1,50 +1,32 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
+		String[] str = br.readLine().split(" ");
+		int N = Integer.parseInt(str[0]);
+		int M = Integer.parseInt(str[1]);
 
-		st = new StringTokenizer(br.readLine());
+		String[] strs = br.readLine().split(" ");
 		int[] list = new int[N];
 		for (int i = 0; i < N; i++) {
-			list[i] = Integer.parseInt(st.nextToken());
+			list[i] = Integer.parseInt(strs[i]);
 		}
 
-		Arrays.sort(list);
-		int answerX = 0;
-		int answerY = 0;
-		int answerZ = 0;
-
-		int gap = Integer.MAX_VALUE;
-
+		int answer = 0;
 		for (int i = 0; i < N; i++) {
 			for (int k = i + 1; k < N; k++) {
-				for (int z = k + 1; z < N; z++) {
-					if (list[i] + list[k] + list[z] > M) break;
-
-					int num = Math.abs(list[i] + list[k] + list[z] - M);
-
-					if (gap > num) {
-						gap = num;
-
-						answerX = i;
-						answerY = k;
-						answerZ = z;
+				for (int l = k + 1; l < N; l++) {
+					if (list[i] + list[k] + list[l] <= M) {
+						answer = Math.max(answer, list[i] + list[k] + list[l]);
 					}
 				}
 			}
 		}
 
-		int sum = list[answerX] + list[answerY] + list[answerZ];
-
-		bw.write(String.valueOf(sum));
-		bw.flush();
-		bw.close();
+		System.out.println(answer);
 	}
 }
