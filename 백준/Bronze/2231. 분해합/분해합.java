@@ -1,38 +1,33 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int num = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(br.readLine());
 
-		int[] cache = new int[num + 1];
-		Arrays.fill(cache, Integer.MAX_VALUE);
+		for (int i = 1; i <= N; i++) {
+			int num = d(i);
 
-		for (int i = 1; i <= num; i++) {
-			int n = d(i);
-
-			if (n <= num) {
-				cache[n] = Math.min(cache[n], i);
+			if (N == num) {
+				System.out.println(i);
+				return;
 			}
 		}
-
-        int answer = (cache[cache.length - 1] == Integer.MAX_VALUE) ? 0 : cache[cache.length - 1];
-		bw.write(String.valueOf(answer));
-		bw.flush();
-		bw.close();
+        
+        System.out.println(0);
 	}
 
 	public static int d(int num) {
-		int ans = num;
+		int temp = num;
 
-		while (num != 0) {
-			ans += num % 10;
-			num /= 10;
+		while (temp > 0) {
+			num += temp % 10;
+			temp /= 10;
 		}
 
-		return ans;
+		return num;
 	}
 }
