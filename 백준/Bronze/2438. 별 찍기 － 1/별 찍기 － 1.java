@@ -4,12 +4,18 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        int a = Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
         
-        String answer = "";
-        for (int i = 1; i <= a; i++) {
-            answer = answer.concat("*");
-            System.out.println(answer);
+        for (int i = 1; i <= N; i++) {
+            
+            for (int k = 1; k <= i; k++) {
+                sb.append("*");
+            }
+            
+            sb.append("\n");
         }
+        
+        System.out.println(sb.toString());
     }
 }
