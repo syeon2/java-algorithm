@@ -1,38 +1,36 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        
-        int target = Integer.parseInt(br.readLine());
-        
-        int count = 0;
-        for (int i = 1; i <= target; i++) {
-            if (check(i)) count++;
-        }
-        
-        bw.write(String.valueOf(count));
-        bw.flush();
-        bw.close();
-    }
-    
-    public static boolean check(int num) {
-        if (num < 100) return true;
-        
-        String[] numStr = String.valueOf(num).split("");
-        
-        int gap = 0;
-        for (int i = 0; i < numStr.length - 1; i++) {
-            if (i == 0) {
-                gap = Integer.parseInt(numStr[i]) - Integer.parseInt(numStr[i + 1]);
-            } else {
-                if (gap != Integer.parseInt(numStr[i]) - Integer.parseInt(numStr[i + 1])) {
-                    return false;
-                }
-            }
-        }
-        
-        return true;
-    }
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		int N = Integer.parseInt(br.readLine());
+
+		int count = 0;
+		for (int i = 1; i <= N; i++) {
+
+			if (i < 100)
+				count++;
+			else {
+				char[] list = String.valueOf(i).toCharArray();
+
+				int gap = list[0] - list[1];
+
+				boolean flag = true;
+				for (int k = 1; k < list.length - 1; k++) {
+					if (list[k] - list[k + 1] != gap) {
+						flag = false;
+						break;
+					}
+				}
+
+				if (flag)
+					count++;
+			}
+		}
+
+		System.out.println(count);
+	}
 }
