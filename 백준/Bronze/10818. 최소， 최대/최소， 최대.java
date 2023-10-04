@@ -5,16 +5,16 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         int N = Integer.parseInt(br.readLine());
-        String[] list = br.readLine().split(" ");
         
-        int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
         
+        String[] list = br.readLine().split(" ");
         for (int i = 0; i < N; i++) {
-            int target = Integer.parseInt(list[i]);
+            int num = Integer.parseInt(list[i]);
             
-            if (min > target) min = target;
-            if (max < target) max = target;
+            if (max < num) max = num;
+            if (min > num) min = num;
         }
         
         System.out.println(min + " " + max);
