@@ -7,22 +7,22 @@ public class Main {
 		int M = Integer.parseInt(br.readLine());
 		int N = Integer.parseInt(br.readLine());
 
-		boolean[] cache = new boolean[N + 1];
-
-		for (int i = 1; i <= N; i++) {
-			if (i * i > N) break;
-
-			cache[i * i] = true;
-		}
-
-		int min = -1;
 		int total = 0;
-		for (int i = M; i <= N; i++) {
-			if (cache[i]) {
-				total += i;
+		int min = -1;
 
-				if (min == -1) min = i;
+		int idx = 1;
+		while (true) {
+			int num = idx * idx;
+
+			if (num >= M && num <= N) {
+				total += num;
+
+				if (min == -1) min = num;
 			}
+
+			idx++;
+
+			if (idx * idx > N) break;
 		}
 
 		if (min == -1) {
