@@ -8,22 +8,23 @@ public class Main {
 
 		int N = Integer.parseInt(br.readLine());
 
-		int curNum = 666;
+		int answer = 666;
 
-		for (int i = 2; i <= N; i++) {
+		if (N == 1)
+			System.out.println(answer);
+		else {
+			for (int i = 2; i <= N; i++) {
 
-			int pos = 1;
+				int temp = answer + 1;
 
-			while (true) {
-				if (String.valueOf(curNum + pos).contains("666")) {
-					curNum += pos;
-					break;
-				} else {
-					pos += 1;
+				while (!String.valueOf(temp).contains("666")) {
+					temp++;
 				}
-			}
-		}
 
-		System.out.println(curNum);
+				answer = temp;
+			}
+            
+            System.out.println(answer);
+		}
 	}
 }
