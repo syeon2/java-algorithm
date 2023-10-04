@@ -1,43 +1,35 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.StringTokenizer;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int E = Integer.parseInt(st.nextToken());
-		int S = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
+		String[] list = br.readLine().split(" ");
+		int E = Integer.parseInt(list[0]);
+		int S = Integer.parseInt(list[1]);
+		int M = Integer.parseInt(list[2]);
 
 		int e = 1;
 		int s = 1;
 		int m = 1;
 
-		int answer = 1;
+		int cur = 1;
 
 		while (true) {
-			if (e == E && s == S && m == M) break;
+			if (E == e && S == s && M == m) break;
 
 			if (e == 15) e = 1;
-			else e += 1;
+			else e++;
 
 			if (s == 28) s = 1;
-			else s += 1;
+			else s++;
 
 			if (m == 19) m = 1;
-			else m += 1;
+			else m++;
 
-			answer += 1;
+			cur++;
 		}
 
-		bw.write(String.valueOf(answer));
-		bw.flush();
-		bw.close();
-    }
+		System.out.println(cur);
+	}
 }
