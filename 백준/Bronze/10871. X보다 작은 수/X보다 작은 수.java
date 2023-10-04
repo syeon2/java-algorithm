@@ -1,24 +1,18 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int n = Integer.parseInt(st.nextToken());
-        int target = Integer.parseInt(st.nextToken());
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        StringBuilder sb = new StringBuilder();
-        st = new StringTokenizer(br.readLine(), " ");
-        for (int i = 0; i < n; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            
-            if (target > num) {
-                sb.append(num).append(" ");
-            }
-        }
-        
-        System.out.println(sb.toString());
-    }
+		String[] info = br.readLine().split(" ");
+		int N = Integer.parseInt(info[0]);
+		int X = Integer.parseInt(info[1]);
+
+		String[] list = br.readLine().split(" ");
+		for (int i = 0; i < N; i++) {
+			int num = Integer.parseInt(list[i]);
+
+			if (X > num) System.out.print(num + " ");
+		}
+	}
 }
