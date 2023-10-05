@@ -3,29 +3,48 @@ import java.io.*;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb;
 
 		int N = Integer.parseInt(br.readLine());
+		int temp = N;
 
-		int num = N;
 		int count = 0;
-		while (true) {
-			String strNum = String.valueOf(num);
 
-			if (strNum.length() == 1) strNum = "0".concat(strNum);
+		do {
+			sb = new StringBuilder();
+			char[] list = String.valueOf(temp).toCharArray();
+			int sum = 0;
 
-			char[] list = strNum.toCharArray();
-			int sum = list[0] - '0' + list[1] - '0';
+			if (list.length == 1) {
+				sum = list[0] - '0';
 
-			char[] split = String.valueOf(sum).toCharArray();
-			int i = split[split.length - 1] - '0';
-			int newNum = (list[1] - '0') * 10 + i;
+				sb.append(sum).append(sum);
 
-			count++;
-			if (N == newNum) break;
+				temp = Integer.parseInt(sb.toString());
+				count++;
+			} else {
+				sum = (list[0] - '0') + (list[1] - '0');
+				
+				char[] list2 = String.valueOf(sum).toCharArray();
 
-			num = newNum;
-		}
+				if (list2.length == 1) {
+					sb.append(list[1] - '0').append(list2[0] - '0');
 
-		System.out.println(count);
+					temp = Integer.parseInt(sb.toString());
+					count++;
+				} else {
+					sb.append(list[1] - '0').append(list2[1] - '0');
+
+					temp = Integer.parseInt(sb.toString());
+					count++;
+				}
+
+			}
+		} while (temp != N);
+
+		bw.write(String.valueOf(count));
+		bw.flush();
+		bw.close();
 	}
 }
