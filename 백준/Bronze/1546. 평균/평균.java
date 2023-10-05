@@ -1,28 +1,27 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int N = Integer.parseInt(br.readLine());
-		double[] list = new double[N];
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
 		int max = 0;
-
-		String[] str = br.readLine().split(" ");
+		int total = 0;
 		for (int i = 0; i < N; i++) {
-			int num = Integer.parseInt(str[i]);
-			list[i] = (double) num;
+			int num = Integer.parseInt(st.nextToken());
+			total += num;
 
-			if (max < num) {
-				max = num;
-			}
+			if (max < num) max = num;
 		}
 
-		double answer = 0;
-		for (int i = 0; i < N; i++) {
-			answer += list[i] / max * 100;
-		}
+		double answer = (double) total / (double) max * 100 / N;
 
-		System.out.println(answer / N);
+		bw.write(String.valueOf(answer));
+		bw.flush();
+		bw.close();
 	}
 }
