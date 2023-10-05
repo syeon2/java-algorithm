@@ -1,11 +1,14 @@
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        char n = br.readLine().charAt(0);
-        
-        System.out.println((int) n);
-    }
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+		String str = br.readLine();
+
+		bw.write(String.valueOf((int) str.charAt(0)));
+		bw.flush();
+		bw.close();
+	}
 }
