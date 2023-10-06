@@ -3,35 +3,44 @@ import java.io.*;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		char[] list = br.readLine().toUpperCase().toCharArray();
+		char[] list = br.readLine().toCharArray();
 
-		char[] cache = new char[26];
+		int[] cache = new int[26];
+		int max = 0;
 
 		for (int i = 0; i < list.length; i++) {
-			int index = list[i] - 'A';
+			if (list[i] >= 'A' && list[i] <= 'Z') {
+				int index = list[i] - 'A';
 
-			cache[index]++;
+				cache[index]++;
+
+				if (cache[index] > max) max = cache[index];
+			} else {
+				int index = list[i] - 'a';
+
+				cache[index]++;
+
+				if (cache[index] > max) max = cache[index];
+			}
 		}
 
-		int max = Integer.MIN_VALUE;
+		int count = 0;
 		int idx = 0;
 		for (int i = 0; i < cache.length; i++) {
-			if (max < cache[i]) {
-				max = cache[i];
+			if (cache[i] == max) {
 				idx = i;
+				count++;
 			}
+
+			if (count > 1) break;
 		}
 
-		for (int i = 0; i < cache.length; i++) {
-			if (max == cache[i] && idx != i) {
-				System.out.println("?");
-				return;
-			}
-		}
+		if (count > 1) bw.write(String.valueOf("?"));
+		else bw.write(String.valueOf((char) (idx + 'A')));
 
-		char i = (char) ((char)idx + 'A');
-
-		System.out.println(i);
+		bw.flush();
+		bw.close();
 	}
 }
