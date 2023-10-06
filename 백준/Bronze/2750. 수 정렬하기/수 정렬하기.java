@@ -1,30 +1,27 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        boolean[] mCache = new boolean[1001];
-        boolean[] pCache = new boolean[1001];
-
+        StringBuilder sb = new StringBuilder();
+        
         int N = Integer.parseInt(br.readLine());
-        
-        for (int i = 0; i < N; i++) {
-            int num = Integer.parseInt(br.readLine());
-            
-            if (num < 0) {
-                mCache[Math.abs(num)] = true;
-            } else {
-                pCache[num] = true;
-            }
+        int[] list = new int[N];
+        for (int i = 0; i < list.length; i++) {
+            list[i] = Integer.parseInt(br.readLine());
         }
         
-        for (int i = 1000; i >= 0; i--) {
-            if (mCache[i]) System.out.println(i * -1);
+        Arrays.sort(list);
+        
+        for (int i = 0; i < list.length; i++) {
+            sb.append(list[i]).append("\n");
         }
         
-        for (int i = 0; i <= 1000; i++) {
-            if (pCache[i]) System.out.println(i);
-        }
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
     }
 }
