@@ -1,25 +1,29 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        String[] list = br.readLine().split(" ");
-        
-        String a = list[0];
-        String b = list[1];
-        
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i <= b.length() - a.length(); i++) {
-            
-            int count = 0;
-            for (int k = i; k < i + a.length(); k++) {
-                if (a.charAt(k - i) != b.charAt(k)) count++;
-            }
-            
-            min = Math.min(min, count);
-        }
-        
-        System.out.println(min);
-    }
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+		char[] aList = st.nextToken().toCharArray();
+		char[] bList = st.nextToken().toCharArray();
+
+		int min = 50;
+
+		for (int i = 0; i <= bList.length - aList.length; i++) {
+			int count = 0;
+
+			for (int k = i; k < i + aList.length; k++) {
+				if (bList[k] != aList[k - i]) count++;
+			}
+
+			if (min > count) min = count;
+		}
+
+		bw.write(String.valueOf(min));
+		bw.flush();
+		bw.close();
+	}
 }
