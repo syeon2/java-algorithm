@@ -1,34 +1,35 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String[] list = br.readLine().split(" ");
-		int x = 0;
-		int y = 0;
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-		int a = Integer.parseInt(list[0]);
-		int b = Integer.parseInt(list[1]);
-		int c = Integer.parseInt(list[2]);
-		int d = Integer.parseInt(list[3]);
-		int e = Integer.parseInt(list[4]);
-		int f = Integer.parseInt(list[5]);
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
+		int c = Integer.parseInt(st.nextToken());
+		int d = Integer.parseInt(st.nextToken());
+		int e = Integer.parseInt(st.nextToken());
+		int f = Integer.parseInt(st.nextToken());
 
-		a *= d;
-		b *= d;
-		c *= d;
-		d *= Integer.parseInt(list[0]);
-		e *= Integer.parseInt(list[0]);
-		f *= Integer.parseInt(list[0]);
+		StringBuilder sb = new StringBuilder();
+		if (a == 0 || d == 0) {
+			int x = ((c * e) - (f * b)) / ((a * e) - (d * b));
+			int y = (c - (a * x)) / b;
 
-		y = (c - f) / (b - e);
-		if (Integer.parseInt(list[0]) != 0) {
-			x = (Integer.parseInt(list[2]) - (Integer.parseInt(list[1]) * y)) / Integer.parseInt(list[0]);
+			sb.append(x).append(" ").append(y);
 		} else {
-			x = (Integer.parseInt(list[5]) - (Integer.parseInt(list[4]) * y)) / Integer.parseInt(list[3]);
+			int y = ((c * d) - (f * a)) / ((b * d) - (e * a));
+			int x = ((c - (b * y)) / a);
+
+			sb.append(x).append(" ").append(y);
 		}
 
-		System.out.println(x + " " + y);
+		bw.write(sb.toString());
+		bw.flush();
+		bw.close();
 	}
 }
