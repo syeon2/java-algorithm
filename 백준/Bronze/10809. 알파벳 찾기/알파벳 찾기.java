@@ -1,33 +1,30 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
 
-        int[] alpha = new int[26];
 		char[] list = br.readLine().toCharArray();
+		int[] cache = new int[26];
 
-		Arrays.fill(alpha, -1);
-
+		Arrays.fill(cache, -1);
 		for (int i = 0; i < list.length; i++) {
-			int idx = list[i] - 97;
+			int index = list[i] - 'a';
 
-			if (alpha[idx] == -1) alpha[idx] = i;
+			if (cache[index] == -1) {
+				cache[index] = i;
+			}
 		}
 
-		for (int i = 0; i < alpha.length; i++) {
-			sb.append(alpha[i]).append(" ");
+		for (int i = 0; i < cache.length; i++) {
+			sb.append(cache[i]).append(" ");
 		}
 
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-    }
+	}
 }
