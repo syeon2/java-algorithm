@@ -1,46 +1,35 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.Stack;
+import java.io.*;
 
 public class Main {
-
-	static Stack<String> stack = new Stack<>();
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
 
-        int T = Integer.parseInt(br.readLine());
-		for (int t = 0; t < T; t++) {
-			String[] list = br.readLine().split("");
+		int N = Integer.parseInt(br.readLine());
 
+		for (int n = 0; n < N; n++) {
+			char[] list = br.readLine().toCharArray();
+
+			int ans = 0;
 			boolean flag = true;
 
-			for (String s : list) {
-				if (s.equals("(")) {
-					stack.push("(");
-				} else {
-					if (stack.isEmpty()) {
+			for (int i = 0; i < list.length; i++) {
+				if (list[i] == '(') ans++;
+				else {
+					if (ans == 0) {
 						flag = false;
 						break;
-					} else {
-						stack.pop();
-					}
+					} else ans--;
 				}
 			}
 
-			if (!flag || !stack.isEmpty()) sb.append("NO").append("\n");
+			if (!flag || ans != 0) sb.append("NO").append("\n");
 			else sb.append("YES").append("\n");
-
-			stack.clear();
 		}
 
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-    }
+	}
 }
