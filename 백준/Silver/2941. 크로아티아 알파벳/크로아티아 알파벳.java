@@ -3,54 +3,31 @@ import java.io.*;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+		String[] list = {"c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="};
 
 		String str = br.readLine();
 
 		int count = 0;
 
-		while (str.contains("c=")) {
-			str = str.replaceFirst("c=", "/");
-			count++;
+		for (int i = 0; i < list.length; i++) {
+			while (true) {
+				String s = str.replaceFirst(list[i], "-");
+
+				if (str.equals(s)) break;
+				else str = s;
+
+				count++;
+			}
 		}
 
-		while (str.contains("c-")) {
-			str = str.replaceFirst("c-", "/");
-			count++;
-		}
+		String s = str.replaceAll("-", "");
 
-		while (str.contains("dz=")) {
-			str = str.replaceFirst("dz=", "/");
-			count++;
-		}
+		count += s.length();
 
-		while (str.contains("d-")) {
-			str = str.replaceFirst("d-", "/");
-			count++;
-		}
-
-		while (str.contains("lj")) {
-			str = str.replaceFirst("lj", "/");
-			count++;
-		}
-
-		while (str.contains("nj")) {
-			str = str.replaceFirst("nj", "/");
-			count++;
-		}
-
-		while (str.contains("s=")) {
-			str = str.replaceFirst("s=", "/");
-			count++;
-		}
-
-		while (str.contains("z=")) {
-			str = str.replaceFirst("z=", "/");
-			count++;
-		}
-
-		str = str.replaceAll("/", "");
-		count += str.length();
-
-		System.out.println(count);
+		bw.write(String.valueOf(count));
+		bw.flush();
+		bw.close();
 	}
 }
