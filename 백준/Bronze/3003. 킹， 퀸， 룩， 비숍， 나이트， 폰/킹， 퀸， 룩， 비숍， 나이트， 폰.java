@@ -1,23 +1,25 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        String[] list = br.readLine().split(" ");
-        
-        int k = 1 - Integer.parseInt(list[0]);
-        int q = 1 - Integer.parseInt(list[1]);
-        int l = 2 - Integer.parseInt(list[2]);
-        int b = 2 - Integer.parseInt(list[3]);
-        int n = 2 - Integer.parseInt(list[4]);
-        int p = 8 - Integer.parseInt(list[5]);
-        
-        System.out.print(k + " ");
-        System.out.print(q + " ");
-        System.out.print(l + " ");
-        System.out.print(b + " ");
-        System.out.print(n + " ");
-        System.out.print(p);
-    }
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int k = 1 - Integer.parseInt(st.nextToken());
+		int q = 1 - Integer.parseInt(st.nextToken());
+		int l = 2 - Integer.parseInt(st.nextToken());
+		int b = 2 - Integer.parseInt(st.nextToken());
+		int kn = 2 - Integer.parseInt(st.nextToken());
+		int p = 8 - Integer.parseInt(st.nextToken());
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(k).append(" ").append(q).append(" ").append(l).append(" ")
+			.append(b).append(" ").append(kn).append(" ").append(p);
+
+		bw.write(sb.toString());
+		bw.flush();
+		bw.close();
+	}
 }
