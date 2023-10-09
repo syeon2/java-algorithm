@@ -1,33 +1,36 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
 
 		int N = Integer.parseInt(br.readLine());
+		StringTokenizer st;
 
 		for (int i = 0; i < N; i++) {
-			String[] info = br.readLine().split(" ");
+			st = new StringTokenizer(br.readLine(), " ");
 
-			int H = Integer.parseInt(info[0]);
-			int W = Integer.parseInt(info[1]);
-			int c = Integer.parseInt(info[2]);
+			int H = Integer.parseInt(st.nextToken());
+			int W = Integer.parseInt(st.nextToken());
+			int P = Integer.parseInt(st.nextToken());
 
-			int next = 1;
-			int floor = 1;
+			int ho = P / H;
+			if (P % H > 0) ho++;
 
-			while (c != 1) {
-				if (floor == H) {
-					floor = 1;
-					next += 1;
-				} else floor++;
+			int floor = P % H;
+			if (floor == 0) floor = H;
 
-				c--;
-			}
+			sb.append(floor);
 
-			System.out.print(floor);
-			if (next < 10) System.out.println("0" + next);
-			else System.out.println(next);
+			if (ho < 10) sb.append(0);
+			sb.append(ho).append("\n");
 		}
+
+		bw.write(sb.toString());
+		bw.flush();
+		bw.close();
 	}
 }
