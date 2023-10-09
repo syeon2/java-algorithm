@@ -7,8 +7,14 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int N = Integer.parseInt(br.readLine());
+        
+        int start = 0;
+        
+        if (start <= 10) start /= 2;
+        else if (start <= 100) start -= 10;
+        else start -= 100;
 
-		for (int i = 1; i <= N; i++) {
+		for (int i = start; i <= N; i++) {
 			int num = d(i);
 
 			if (N == num) {
