@@ -1,18 +1,23 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        String[] list = br.readLine().split(" ");
-        int x = Integer.parseInt(list[0]);
-        int y = Integer.parseInt(list[1]);
-        int w = Integer.parseInt(list[2]);
-        int h = Integer.parseInt(list[3]);
-        
-        x = Math.min(w - x, x);
-        y = Math.min(h - y, y);
-        
-        System.out.println(Math.min(x, y));
-    }
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int x = Integer.parseInt(st.nextToken());
+		int y = Integer.parseInt(st.nextToken());
+		int w = Integer.parseInt(st.nextToken());
+		int h = Integer.parseInt(st.nextToken());
+
+		int minX = Math.min(Math.abs(x), Math.abs(x - w));
+		int minY = Math.min(Math.abs(y), Math.abs(y - h));
+
+		int ans = Math.min(minX, minY);
+		bw.write(String.valueOf(ans));
+		bw.flush();
+		bw.close();
+	}
 }
