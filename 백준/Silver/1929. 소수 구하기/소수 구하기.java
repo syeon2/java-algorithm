@@ -1,35 +1,32 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
 
-        boolean[] list = new boolean[1000001];
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int M = Integer.parseInt(st.nextToken());
+		int N = Integer.parseInt(st.nextToken());
 
-		list[0] = list[1] = true;
-		for (int i = 2; i <= 1000000; i++) {
-			for (int k = i + i; k <= 1000000; k += i) {
-				list[k] = true;
+		boolean[] ar = new boolean[N + 1];
+
+		ar[1] = true;
+		for (int i = 2; i <= N; i++) {
+
+			for (int k = i + i; k <= N; k += i) {
+				ar[k] = true;
 			}
 		}
 
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int A = Integer.parseInt(st.nextToken());
-		int B = Integer.parseInt(st.nextToken());
-
-		for (int i = A; i <= B; i++) {
-			if (!list[i]) sb.append(i).append("\n");
+		for (int i = M; i <= N; i++) {
+			if (!ar[i]) sb.append(i).append("\n");
 		}
 
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-    }
+	}
 }
