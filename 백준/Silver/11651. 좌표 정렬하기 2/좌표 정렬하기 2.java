@@ -1,32 +1,33 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
 
-        int N = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(br.readLine());
+
+		StringTokenizer st;
+
 		int[][] list = new int[N][2];
 
 		for (int i = 0; i < N; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+			st = new StringTokenizer(br.readLine(), " ");
 
-			list[i][0] = Integer.parseInt(st.nextToken());
-			list[i][1] = Integer.parseInt(st.nextToken());
+			int x = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
+
+			list[i][0] = x;
+			list[i][1] = y;
 		}
 
-		Arrays.sort(list, new Comparator<int[]>() {
-			@Override
-			public int compare(int[] o1, int[] o2) {
-				return o1[1] != o2[1] ? o1[1] - o2[1] : o1[0] - o2[0];
+		Arrays.sort(list, (a, b) -> {
+			if (a[1] != b[1]) {
+				return a[1] - b[1];
+			} else {
+				return a[0] - b[0];
 			}
 		});
 
@@ -37,5 +38,5 @@ public class Main {
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-    }
+	}
 }
