@@ -1,41 +1,34 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
-
-		Queue<Integer> queue = new LinkedList<>();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		int N = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
 
+		Queue<Integer> queue = new LinkedList<>();
 		for (int i = 1; i <= N; i++) {
 			queue.add(i);
 		}
 
+		int count = 0;
+
+		StringBuilder sb = new StringBuilder();
 		sb.append("<");
-
-		int target = 1;
 		while (queue.size() != 1) {
-			Integer remove = queue.remove();
+			count++;
 
-			if (target != K) {
-				queue.add(remove);
-				target++;
-			}
-			else {
-				target = 1;
-				sb.append(remove).append(", ");
+			if (count == K) {
+				int num = queue.remove();
+
+				sb.append(num).append(", ");
+				count = 0;
+			} else {
+				queue.add(queue.remove());
 			}
 		}
 
@@ -44,5 +37,5 @@ public class Main {
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-    }
+	}
 }
