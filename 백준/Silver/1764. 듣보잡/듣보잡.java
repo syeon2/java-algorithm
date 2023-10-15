@@ -1,52 +1,43 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
-
-		Set<String> set = new HashSet<>();
-		Queue<String> queue = new LinkedList<>();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 
+		Set<String> set = new HashSet<>();
+
 		for (int i = 0; i < N; i++) {
-			String name = br.readLine();
-			set.add(name);
+			set.add(br.readLine());
 		}
 
 		int count = 0;
+		List<String> list = new ArrayList<>();
 		for (int i = 0; i < M; i++) {
-			String name = br.readLine();
-			boolean remove = set.remove(name);
+			String str = br.readLine();
 
-			if (remove) {
+			if (set.contains(str)) {
 				count++;
-				queue.add(name);
+				list.add(str);
 			}
 		}
 
-		sb.append(count).append("\n");
-		String[] array = queue.toArray(String[]::new);
-		Arrays.sort(array);
-		
-		Arrays.stream(array).forEach(s -> sb.append(s).append("\n"));
+		Collections.sort(list);
 
-		bw.write(sb.toString());
+		bw.write(String.valueOf(count));
+		bw.newLine();
+
+		for (int i = 0; i < list.size(); i++) {
+			bw.write(list.get(i));
+			bw.newLine();
+		}
+
 		bw.flush();
 		bw.close();
-    }
+	}
 }
