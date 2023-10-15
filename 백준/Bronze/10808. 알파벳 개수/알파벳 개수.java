@@ -1,28 +1,26 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int[] alpha = new int[26];
-		char[] list = br.readLine().toCharArray();
+		String str = br.readLine();
 
-		for (char c : list) {
-			alpha[c - 97]++;
+		int[] cache = new int[26];
+
+		for (int i = 0; i < str.length(); i++) {
+			char c = str.charAt(i);
+
+			cache[c - 'a']++;
 		}
 
-		for (int i = 0; i < alpha.length; i++) {
-			sb.append(alpha[i]).append(" ");
+		for (int i = 0; i < 26; i++) {
+			bw.write(String.valueOf(cache[i]));
+			bw.write(" ");
 		}
 
-		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-    }
+	}
 }
