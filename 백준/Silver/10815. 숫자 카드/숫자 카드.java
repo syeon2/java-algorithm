@@ -1,62 +1,43 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = Integer.parseInt(br.readLine());
-		int[] nList = new int[N];
+		int N = Integer.parseInt(br.readLine());
+
+		boolean[] minusList = new boolean[10000001];
+		boolean[] plusList = new boolean[10000001];
 
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 0; i < N; i++) {
-			nList[i] = Integer.parseInt(st.nextToken());
+			int num = Integer.parseInt(st.nextToken());
+
+			if (num >= 0) plusList[num] = true;
+			else minusList[num * -1] = true;
 		}
 
+		StringBuilder sb = new StringBuilder();
+
 		int M = Integer.parseInt(br.readLine());
-		int[] mList = new int[M];
 
 		st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 0; i < M; i++) {
-			mList[i] = Integer.parseInt(st.nextToken());
-		}
+			int num = Integer.parseInt(st.nextToken());
 
-		Arrays.sort(nList);
-		
-		for (int i = 0; i < M; i++) {
-
-			int left = 0;
-			int right = N - 1;
-
-			int target = mList[i];
-
-			boolean flag = false;
-			while (left <= right) {
-				int mid = (right + left) / 2;
-
-				if (nList[mid] > target) {
-					right = mid - 1;
-				} else if (nList[mid] < target) {
-					left = mid + 1;
-				} else {
-					flag = true;
-					sb.append("1 ");
-					break;
-				}
+			if (num >= 0) {
+				if (plusList[num]) sb.append(1).append(" ");
+				else sb.append(0).append(" ");
+			} else {
+				if (minusList[num * -1]) sb.append(1).append(" ");
+				else sb.append(0).append(" ");
 			}
-
-			if (!flag) sb.append("0 ");
 		}
 
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-    }
+	}
 }
