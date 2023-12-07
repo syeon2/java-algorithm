@@ -1,28 +1,33 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int A = Integer.parseInt(br.readLine());
-		int B = Integer.parseInt(br.readLine());
+		int a = Integer.parseInt(br.readLine());
+		int b = Integer.parseInt(br.readLine());
 
-		char[] list = String.valueOf(B).toCharArray();
+		String[] list = String.valueOf(b).split("");
 
-		int pos = 1;
-		int total = 0;
+		int three = a * Integer.parseInt(list[2]);
+		int four = a * Integer.parseInt(list[1]);
+		int five = a * Integer.parseInt(list[0]);
 
-		for (int i = list.length - 1; i >= 0; i--) {
-			int num = A * (list[i] - '0');
+		int six = three + (four * 10) + (five * 100);
 
-			System.out.println(num);
+		bw.write(String.valueOf(three));
+		bw.newLine();
 
-			total += num * pos;
-			pos *= 10;
-		}
+		bw.write(String.valueOf(four));
+		bw.newLine();
 
-		System.out.println(total);
+		bw.write(String.valueOf(five));
+		bw.newLine();
+
+		bw.write(String.valueOf(six));
+
+		bw.flush();
+		bw.close();
 	}
 }
