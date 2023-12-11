@@ -7,7 +7,10 @@ public class Main {
 
 		String[] list = br.readLine().split(" ");
 
-		double answer = Double.parseDouble(list[0]) / Double.parseDouble(list[1]);
+		int A = Integer.parseInt(list[0]);
+		int B = Integer.parseInt(list[1]);
+
+		double answer = (double) A / (double) B;
 
 		bw.write(String.valueOf(answer));
 		bw.flush();
