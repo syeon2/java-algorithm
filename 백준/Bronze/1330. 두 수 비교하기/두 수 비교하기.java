@@ -7,11 +7,11 @@ public class Main {
 
 		String[] list = br.readLine().split(" ");
 
-		int a = Integer.parseInt(list[0]);
-		int b = Integer.parseInt(list[1]);
+		int A = Integer.parseInt(list[0]);
+		int B = Integer.parseInt(list[1]);
 
-		if (a > b) bw.write(">");
-		else if (b > a) bw.write("<");
+		if (A > B) bw.write(">");
+		else if (A < B) bw.write("<");
 		else bw.write("==");
 
 		bw.flush();
