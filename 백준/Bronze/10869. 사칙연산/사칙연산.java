@@ -7,19 +7,22 @@ public class Main {
 
 		String[] list = br.readLine().split(" ");
 
-		int a = Integer.parseInt(list[0]);
-		int b = Integer.parseInt(list[1]);
+		int A = Integer.parseInt(list[0]);
+		int B = Integer.parseInt(list[1]);
 
-		bw.write(String.valueOf(a + b));
+		bw.write(String.valueOf(A + B));
 		bw.newLine();
-		bw.write(String.valueOf(a - b));
-		bw.newLine();
-		bw.write(String.valueOf(a * b));
-		bw.newLine();
-		bw.write(String.valueOf(a / b));
-		bw.newLine();
-		bw.write(String.valueOf(a % b));
 
+		bw.write(String.valueOf(A - B));
+		bw.newLine();
+
+		bw.write(String.valueOf(A * B));
+		bw.newLine();
+
+		bw.write(String.valueOf(A / B));
+		bw.newLine();
+
+		bw.write(String.valueOf(A % B));
 		bw.flush();
 		bw.close();
 	}
