@@ -5,9 +5,9 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String str = br.readLine();
+		String ans = br.readLine();
 
-		bw.write(String.valueOf((int) str.charAt(0)));
+		bw.write(String.valueOf(ans.charAt(0) + 0));
 		bw.flush();
 		bw.close();
 	}
