@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
@@ -7,14 +6,16 @@ public class Main {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int N = Integer.parseInt(br.readLine());
-		char[] list = br.readLine().toCharArray();
 
-		int total = 0;
-		for (int i = 0; i < N; i++) {
-			total += (list[i] - '0');
+		String list = br.readLine();
+
+		int ans = 0;
+
+		for (int i = 0; i < list.length(); i++) {
+			ans += list.charAt(i) - '0';
 		}
 
-		bw.write(String.valueOf(total));
+		bw.write(String.valueOf(ans));
 		bw.flush();
 		bw.close();
 	}
