@@ -4,14 +4,17 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		StringBuilder sb = new StringBuilder();
+		bw.write("\\    /\\");
+		bw.newLine();
 
-		sb.append("\\    /\\").append("\n")
-			.append(" )  ( ')").append("\n")
-			.append("(  /  )").append("\n")
-			.append(" \\(__)|");
+		bw.write(" )  ( ')");
+		bw.newLine();
 
-		bw.write(sb.toString());
+		bw.write("(  /  )");
+		bw.newLine();
+
+		bw.write(" \\(__)|");
+
 		bw.flush();
 		bw.close();
 	}
