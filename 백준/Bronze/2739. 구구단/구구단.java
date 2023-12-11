@@ -5,12 +5,12 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+		int N = Integer.parseInt(br.readLine());
+
 		StringBuilder sb = new StringBuilder();
 
-		int num = Integer.parseInt(br.readLine());
-
-		for (int i = 1; i < 10; i++) {
-			sb.append(num).append(" * ").append(i).append(" = ").append(num * i).append('\n');
+		for (int i = 1; i <= 9; i++) {
+			sb.append(N).append(" * ").append(i).append(" = ").append(N * i).append("\n");
 		}
 
 		bw.write(sb.toString());
