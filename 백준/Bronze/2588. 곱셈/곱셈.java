@@ -5,27 +5,27 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int a = Integer.parseInt(br.readLine());
-		int b = Integer.parseInt(br.readLine());
+		int A = Integer.parseInt(br.readLine());
 
-		String[] list = String.valueOf(b).split("");
+		String[] list = br.readLine().split("");
 
-		int three = a * Integer.parseInt(list[2]);
-		int four = a * Integer.parseInt(list[1]);
-		int five = a * Integer.parseInt(list[0]);
+		int b1 = Integer.parseInt(list[0]);
+		int b2 = Integer.parseInt(list[1]);
+		int b3 = Integer.parseInt(list[2]);
 
-		int six = three + (four * 10) + (five * 100);
-
+		int three = A * b3;
 		bw.write(String.valueOf(three));
 		bw.newLine();
 
+		int four = A * b2;
 		bw.write(String.valueOf(four));
 		bw.newLine();
 
+		int five = A * b1;
 		bw.write(String.valueOf(five));
 		bw.newLine();
 
-		bw.write(String.valueOf(six));
+		bw.write(String.valueOf(three + four * 10 + five * 100));
 
 		bw.flush();
 		bw.close();
