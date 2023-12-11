@@ -1,22 +1,23 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String[] list = br.readLine().split(" ");
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-		int N = Integer.parseInt(list[0]);
-		int X = Integer.parseInt(list[1]);
+		int N = Integer.parseInt(st.nextToken());
+		int X = Integer.parseInt(st.nextToken());
 
-		String[] list2 = br.readLine().split(" ");
+		st = new StringTokenizer(br.readLine(), " ");
 
 		for (int i = 0; i < N; i++) {
-			int num = Integer.parseInt(list2[i]);
+			int num = Integer.parseInt(st.nextToken());
 
 			if (num < X) {
-				bw.write(list2[i]);
+				bw.write(String.valueOf(num));
 				bw.write(" ");
 			}
 		}
