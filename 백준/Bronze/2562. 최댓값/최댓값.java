@@ -6,20 +6,20 @@ public class Main {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int max = 0;
-		int index = -1;
+		int idx = 0;
 
 		for (int i = 1; i <= 9; i++) {
 			int num = Integer.parseInt(br.readLine());
 
-			if (num > max) {
+			if (max < num) {
 				max = num;
-				index = i;
+				idx = i;
 			}
 		}
 
 		bw.write(String.valueOf(max));
-		bw.write(" ");
-		bw.write(String.valueOf(index));
+		bw.newLine();
+		bw.write(String.valueOf(idx));
 
 		bw.flush();
 		bw.close();
