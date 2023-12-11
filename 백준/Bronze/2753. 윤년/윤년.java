@@ -5,13 +5,10 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int num = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(br.readLine());
 
-		if (num % 4 == 0 && (num % 100 > 0 || num % 400 == 0)) {
-			bw.write("1");
-		} else {
-			bw.write("0");
-		}
+		if (N % 4 == 0 && (N % 100 > 0 || N % 400 == 0)) bw.write("1");
+		else bw.write("0");
 
 		bw.flush();
 		bw.close();
