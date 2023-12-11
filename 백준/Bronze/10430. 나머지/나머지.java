@@ -1,15 +1,16 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String[] list = br.readLine().split(" ");
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-		int A = Integer.parseInt(list[0]);
-		int B = Integer.parseInt(list[1]);
-		int C = Integer.parseInt(list[2]);
+		int A = Integer.parseInt(st.nextToken());
+		int B = Integer.parseInt(st.nextToken());
+		int C = Integer.parseInt(st.nextToken());
 
 		bw.write(String.valueOf((A + B) % C));
 		bw.newLine();
