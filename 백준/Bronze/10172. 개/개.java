@@ -4,16 +4,22 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		StringBuilder sb = new StringBuilder();
+		bw.write("|\\_/|");
+		bw.newLine();
 
-		sb.append("|\\_/|").append("\n")
-			.append("|q p|   /}").append("\n")
-			.append("( 0 )\"\"\"\\").append("\n")
-			.append("|\"^\"`    |").append("\n")
-			.append("||_/=\\\\__|");
+		bw.write("|q p|   /}");
+		bw.newLine();
 
-		bw.write(sb.toString());
+		bw.write("( 0 )\"\"\"\\");
+		bw.newLine();
+
+		bw.write("|\"^\"`    |");
+		bw.newLine();
+
+		bw.write("||_/=\\\\__|");
+
 		bw.flush();
 		bw.close();
+
 	}
 }
