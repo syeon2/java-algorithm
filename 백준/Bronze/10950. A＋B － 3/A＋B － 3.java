@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
@@ -6,14 +7,15 @@ public class Main {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int N = Integer.parseInt(br.readLine());
+		StringTokenizer st;
 
 		for (int i = 0; i < N; i++) {
-			String[] list = br.readLine().split(" ");
+			st = new StringTokenizer(br.readLine(), " ");
 
-			int a = Integer.parseInt(list[0]);
-			int b = Integer.parseInt(list[1]);
+			int A = Integer.parseInt(st.nextToken());
+			int B = Integer.parseInt(st.nextToken());
 
-			bw.write(String.valueOf(a + b));
+			bw.write(String.valueOf(A + B));
 			bw.newLine();
 		}
 
