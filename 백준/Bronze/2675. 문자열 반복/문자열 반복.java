@@ -1,30 +1,31 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
 
 		int N = Integer.parseInt(br.readLine());
 
-		for (int n = 0; n < N; n++) {
-			String[] list = br.readLine().split(" ");
-			int count = Integer.parseInt(list[0]);
-			String[] str = list[1].split("");
+		for (int i = 0; i < N; i++) {
+			StringBuilder sb = new StringBuilder();
+			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-			for (int i = 0; i < str.length; i++) {
+			int count = Integer.parseInt(st.nextToken());
+			String[] word = st.nextToken().split("");
 
-				String s = str[i];
-				for (int k = 0; k < count; k++) {
-					sb.append(s);
+			for (int k = 0; k < word.length; k++) {
+
+				for (int l = 0; l < count; l++) {
+					sb.append(word[k]);
 				}
 			}
 
-			sb.append("\n");
+			bw.write(sb.toString());
+			bw.newLine();
 		}
 
-		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
 	}
