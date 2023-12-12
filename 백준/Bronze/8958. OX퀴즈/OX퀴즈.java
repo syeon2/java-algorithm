@@ -4,29 +4,28 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
 
 		int N = Integer.parseInt(br.readLine());
 
-		for (int n = 0; n < N; n++) {
-			char[] list = br.readLine().toCharArray();
+		for (int i = 0; i < N; i++) {
+			String[] list = br.readLine().split("");
 
-			int total = 0;
-			int count = 0;
+			int score = 0;
+			int count = 1;
+			for (int k = 0; k < list.length; k++) {
+				if (list[k].equals("O")) {
+					score += count;
 
-			for (int i = 0; i < list.length; i++) {
-				if (list[i] == 'O') {
-					count += 1;
-					total += count;
+					count++;
 				} else {
-					count = 0;
+					count = 1;
 				}
 			}
 
-			sb.append(total).append("\n");
+			bw.write(String.valueOf(score));
+			bw.newLine();
 		}
 
-		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
 	}
