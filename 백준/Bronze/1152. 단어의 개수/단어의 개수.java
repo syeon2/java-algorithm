@@ -5,15 +5,10 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String str = br.readLine();
+		String[] list = br.readLine().trim().split(" ");
 
-		if (str.equals(" ")) bw.write(String.valueOf(0));
-		else {
-			String[] list = str.trim().split(" ");
-
-			bw.write(String.valueOf(list.length));
-		}
-
+		if (list[0].isBlank()) bw.write("0");
+		else bw.write(String.valueOf(list.length));
 		bw.flush();
 		bw.close();
 	}
