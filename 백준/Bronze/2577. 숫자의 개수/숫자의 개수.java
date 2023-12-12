@@ -9,21 +9,20 @@ public class Main {
 		int B = Integer.parseInt(br.readLine());
 		int C = Integer.parseInt(br.readLine());
 
-		int total = A * B * C;
+		String x = String.valueOf(A * B * C);
+		int[] list = new int[10];
 
-		char[] list = String.valueOf(total).toCharArray();
+		for (int i = 0; i < x.length(); i++) {
+			int idx = x.charAt(i) - '0';
 
-		int[] cache = new int[10];
-		for (int i = 0; i < list.length; i++) {
-			cache[list[i] - '0']++;
+			list[idx]++;
 		}
 
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < cache.length; i++) {
-			sb.append(cache[i]).append("\n");
+		for (int i = 0; i < 10; i++) {
+			bw.write(String.valueOf(list[i]));
+			bw.newLine();
 		}
 
-		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
 	}
