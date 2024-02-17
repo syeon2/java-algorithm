@@ -1,37 +1,38 @@
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
 
 		int N = Integer.parseInt(br.readLine());
-		StringTokenizer st;
 
-		for (int n = 0; n < N; n++) {
-			st = new StringTokenizer(br.readLine(), " ");
+		for (int q = 0; q < N; q++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
 
-			int C = Integer.parseInt(st.nextToken());
+			int n = Integer.parseInt(st.nextToken());
 
-			int[] list = new int[C];
-			int total = 0;
-			for (int c = 0; c < C; c++) {
-				list[c] = Integer.parseInt(st.nextToken());
-				total += list[c];
+			double avg = 0;
+			int[] list = new int[n];
+			for (int i = 0; i < n; i++) {
+				list[i] = Integer.parseInt(st.nextToken());
+				avg += list[i];
 			}
 
-			double avg = (double) total / (double) (100 * C) * 100;
+			avg /= n;
 
-			int count = 0;
-			for (int i = 0; i < list.length; i++) {
-				if (avg < list[i]) count++;
+			int cnt = 0;
+			for (int i = 0; i < n; i++) {
+				if (avg < list[i]) cnt++;
 			}
 
-			double answer = (double) count / (double) C * 100;
-
-			System.out.printf("%.3f", answer);
-			System.out.println("%");
+			sb.append(String.format("%.3f", (double) cnt / n * 100)).append("%\n");
 		}
+
+		bw.write(sb.toString());
+		bw.flush();
+		bw.close();
 	}
 }
