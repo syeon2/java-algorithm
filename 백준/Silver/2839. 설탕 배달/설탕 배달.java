@@ -7,17 +7,18 @@ public class Main {
         
         int N = Integer.parseInt(br.readLine());
         
-        int five = 0;
+        int cnt = N / 5;
         
         int ans = -1;
-        while (true) {
-            if (five * 5 > N) break;
+        while (cnt >= 0) {
+            int temp = N - (5 * cnt);
             
-            int temp = N - (five * 5);
+            if (temp % 3 == 0) {
+                ans = cnt + (temp / 3);
+                break;
+            }
             
-            if (temp % 3 == 0) ans = five + (temp / 3);
-            
-            five++;
+            cnt--;
         }
         
         bw.write(String.valueOf(ans));
