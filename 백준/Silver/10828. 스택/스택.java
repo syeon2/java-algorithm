@@ -10,33 +10,27 @@ public class Main {
 
 		int N = Integer.parseInt(br.readLine());
 
-		Stack<Integer> stack = new Stack<>();
-
+		List<Integer> list = new ArrayList<>();
 		for (int n = 0; n < N; n++) {
-			st = new StringTokenizer(br.readLine(), " ");
+			st = new StringTokenizer(br.readLine());
 
-			String command = st.nextToken();
+			String cmd = st.nextToken();
 
-			if (command.equals("push")) {
+			if (cmd.equals("push")) {
 				int num = Integer.parseInt(st.nextToken());
 
-				stack.push(num);
-			} else if (command.equals("pop")) {
-				if (stack.isEmpty()) {
-					sb.append(-1).append("\n");
-				} else {
-					int num = stack.pop();
-
-					sb.append(num).append("\n");
-				}
-			} else if (command.equals("size")) {
-				sb.append(stack.size()).append("\n");
-			} else if (command.equals("empty")) {
-				if (stack.isEmpty()) sb.append(1).append("\n");
+				list.add(num);
+			} else if (cmd.equals("pop")) {
+				if (list.isEmpty()) sb.append("-1\n");
+				else sb.append(list.remove(list.size() - 1)).append("\n");
+			} else if (cmd.equals("size")) {
+				sb.append(list.size()).append("\n");
+			} else if (cmd.equals("empty")) {
+				if (list.isEmpty()) sb.append(1).append("\n");
 				else sb.append(0).append("\n");
 			} else {
-				if (stack.isEmpty()) sb.append(-1).append("\n");
-				else sb.append(stack.peek()).append("\n");
+				if (list.isEmpty()) sb.append(-1).append("\n");
+				else sb.append(list.get(list.size() - 1)).append("\n");
 			}
 		}
 
