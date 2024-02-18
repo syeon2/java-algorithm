@@ -7,13 +7,12 @@ public class Main {
         
         int N = Integer.parseInt(br.readLine());
         
-        int answer = 1;
-        
+        int prod = 1;
         for (int i = 1; i <= N; i++) {
-            answer *= i;
+            prod *= i;
         }
         
-        bw.write(String.valueOf(answer));
+        bw.write(String.valueOf(prod));
         bw.flush();
         bw.close();
     }
