@@ -1,32 +1,36 @@
 import java.io.*;
 
 public class Main {
+
+	public static String[] list = {"c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="};
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String[] list = {"c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="};
-
 		String str = br.readLine();
 
-		int count = 0;
+		int cnt = 0;
+		while (true) {
+			boolean flag = false;
 
-		for (int i = 0; i < list.length; i++) {
-			while (true) {
-				String s = str.replaceFirst(list[i], "-");
+			for (int i = 0; i < list.length; i++) {
+				if (str.indexOf(list[i]) != -1) {
+					int startPos = str.indexOf(list[i]);
+					int endPos = str.indexOf(list[i]) + list[i].length() - 1;
 
-				if (str.equals(s)) break;
-				else str = s;
-
-				count++;
+					str = str.substring(0, startPos).concat(" ").concat(str.substring(endPos + 1));
+					flag = true;
+					cnt++;
+					break;
+				}
 			}
+
+			if (!flag) break;
 		}
 
-		String s = str.replaceAll("-", "");
-
-		count += s.length();
-
-		bw.write(String.valueOf(count));
+		str = str.replace(" ", "");
+		bw.write(String.valueOf(cnt + str.length()));
 		bw.flush();
 		bw.close();
 	}
