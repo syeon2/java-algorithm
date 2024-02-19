@@ -1,18 +1,20 @@
 import java.io.*;
-import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        Integer[] list = Arrays.stream(br.readLine().split(" "))
-            .map(Integer::parseInt)
-            .toArray(Integer[]::new);
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        int C = Integer.parseInt(st.nextToken());
         
-        Arrays.sort(list);
+        if ((A >= B && A <= C) || (A >= C && A <= B)) bw.write(String.valueOf(A));
+        else if ((B >= A && B <= C) || (B >= C && B <= A)) bw.write(String.valueOf(B));
+        else bw.write(String.valueOf(C));
         
-        bw.write(String.valueOf(list[1]));
         bw.flush();
         bw.close();
     }
