@@ -7,9 +7,8 @@ public class Main {
         
         StringBuilder sb = new StringBuilder();
         
-        String str = "";
-        
-        while((str = br.readLine()) != null) {
+        String str;
+        while ((str = br.readLine()) != null) {
             sb.append(str).append("\n");
         }
         
