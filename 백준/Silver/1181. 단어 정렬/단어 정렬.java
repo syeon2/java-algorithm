@@ -1,43 +1,36 @@
 import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		Set<String> set = new HashSet<>();
-
 		int N = Integer.parseInt(br.readLine());
-
+		String[] list = new String[N];
 		for (int i = 0; i < N; i++) {
-			set.add(br.readLine());
+			list[i] = br.readLine();
 		}
 
-		List<String> arrList = new ArrayList<>(set);
-		arrList.sort(Comparator.comparingInt(String::length));
-
-		String[] list = arrList.toArray(String[]::new);
-
-		for (int i = 0; i < list.length - 1; i++) {
-
-			int k = i;
-			while (k < list.length - 1) {
-				if (list[i].length() == list[k + 1].length()) k++;
-				else break;
+		Arrays.sort(list, (a, b) -> {
+			if (a.length() == b.length()) {
+                return a.compareTo(b);
 			}
 
-			for (int j = i + 1; j <= k; j++) {
-				if (list[i].compareTo(list[j]) > 0) {
-					String temp = list[i];
-					list[i] = list[j];
-					list[j] = temp;
-				}
-			}
+			return a.length() - b.length();
+		});
+
+		StringBuilder sb = new StringBuilder();
+		String pre = "";
+		for (int i = 0; i < N; i++) {
+			if (!pre.equals(list[i])) sb.append(list[i]).append("\n");
+
+			pre = list[i];
+
 		}
 
-		for (String s : list) {
-			System.out.println(s);
-		}
+		bw.write(sb.toString());
+		bw.flush();
+		bw.close();
 	}
 }
