@@ -1,34 +1,45 @@
-import java.io.*;
 import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		int N = Integer.parseInt(br.readLine());
-
-		String[][] list = new String[N][2];
-
-		StringTokenizer st;
-		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
-
-			list[i][0] = st.nextToken();
-			list[i][1] = st.nextToken();
-		}
-
-		Arrays.sort(list, (a, b) -> {
-			return Integer.parseInt(a[0]) - Integer.parseInt(b[0]);
-		});
-
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < N; i++) {
-			sb.append(list[i][0]).append(" ").append(list[i][1]).append("\n");
-		}
-
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
-	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int N = sc.nextInt();
+        
+        Person[] list = new Person[N];
+        for (int n = 0; n < N; n++) {
+            int age = sc.nextInt();
+            String name = sc.next();
+            int idx = n;
+            
+            list[n] = new Person(age, name, idx);
+        }
+        
+        Arrays.sort(list, new Comparator<Person>() {
+            @Override
+            public int compare(Person a, Person b) {
+                if (a.age == b.age) {
+                    return a.idx - b.idx;
+                }
+                
+                return a.age - b.age;
+            }
+        });
+        
+        for (int i = 0; i < list.length; i++) {
+            System.out.printf("%d %s\n", list[i].age, list[i].name);
+        }
+    }
+    
+    public static class Person {
+        public int age;
+        public String name;
+        public int idx;
+        
+        public Person(int age, String name, int idx) {
+            this.age = age;
+            this.name = name;
+            this.idx = idx;
+        }
+    }
 }
