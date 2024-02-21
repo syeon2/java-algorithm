@@ -1,14 +1,12 @@
-import java.io.*;
 import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 
-		int N = Integer.parseInt(br.readLine());
+		int N = sc.nextInt();
 
 		Queue<Integer> queue = new LinkedList<>();
-
 		for (int i = 1; i <= N; i++) {
 			queue.add(i);
 		}
@@ -19,6 +17,6 @@ public class Main {
 			queue.add(queue.remove());
 		}
 
-		System.out.println(queue.remove());
+		System.out.print(queue.remove());
 	}
 }
