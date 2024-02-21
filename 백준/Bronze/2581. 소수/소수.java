@@ -1,42 +1,40 @@
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		int min = Integer.parseInt(br.readLine());
-		int max = Integer.parseInt(br.readLine());
-
-		boolean[] list = new boolean[max + 1];
-
-		list[1] = true;
-		for (int i = 2; i <= max; i++) {
-
-			for (int k = i + i; k <= max; k += i) {
-				list[k] = true;
-			}
-		}
-
-		int ansMin = -1;
-		int sum = 0;
-		for (int i = min; i <= max; i++) {
-			if (!list[i]) {
-				sum += i;
-
-				if (ansMin == -1) ansMin = i;
-			}
-		}
-
-		if (ansMin == -1) bw.write(String.valueOf(ansMin));
-		else {
-			bw.write(String.valueOf(sum));
-			bw.newLine();
-			bw.write(String.valueOf(ansMin));
-		}
-
-		bw.flush();
-		bw.close();
-	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int M = sc.nextInt();
+        int N = sc.nextInt();
+        
+        boolean[] isNotPrime = new boolean[N + 1];
+        isNotPrime[1] = true;
+        
+        for (int i = 2; i <= N; i++) {
+            if (isNotPrime[i]) continue;
+            
+            int cnt = 2;
+            while (i * cnt <= N) {
+                int idx = i * cnt++;
+                
+                isNotPrime[idx] = true;
+            }
+        }
+        
+        int ans = 0;
+        int min = -1;
+        for (int i = M; i <= N; i++) {
+            if (!isNotPrime[i]) {
+                ans += i;
+                
+                if (min == -1) min = i;
+            }
+        }
+        
+        if (min == -1) System.out.println(min);
+        else {
+            System.out.println(ans);
+            System.out.println(min);
+        }
+    }
 }
