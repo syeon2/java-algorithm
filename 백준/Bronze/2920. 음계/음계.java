@@ -1,50 +1,35 @@
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int start = Integer.parseInt(st.nextToken());
-
-		if (start == 1) {
-			int count = 1;
-
-			while (count++ < 8) {
-				if (++start != Integer.parseInt(st.nextToken())) {
-					bw.write("mixed");
-					bw.flush();
-					bw.close();
-
-					return;
-				}
-			}
-
-			bw.write("ascending");
-			bw.flush();
-			bw.close();
-		} else if (start == 8) {
-			int count = 1;
-
-			while (count++ < 8) {
-				if (--start != Integer.parseInt(st.nextToken())) {
-					bw.write("mixed");
-					bw.flush();
-					bw.close();
-
-					return;
-				}
-			}
-
-			bw.write("descending");
-			bw.flush();
-			bw.close();
-		} else {
-			bw.write("mixed");
-			bw.flush();
-			bw.close();
-		}
-	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int start = sc.nextInt();
+        
+        if (start == 1) {
+            boolean flag = true;
+            
+            for (int i = 0; i < 7; i++) {
+                int next = sc.nextInt();
+                
+                if (next - 1 != start) flag = false;
+                else start = next;
+            }
+            
+            if (flag) System.out.print("ascending");
+            else System.out.print("mixed");
+        } else if (start == 8) {
+            boolean flag = true;
+            
+            for (int i = 0; i < 7; i++) {
+                int next = sc.nextInt();
+                
+                if (next != start - 1) flag = false;
+                else start = next;
+            }
+            
+            if (flag) System.out.print("descending");
+            else System.out.print("mixed");
+        } else System.out.print("mixed");
+    }
 }
