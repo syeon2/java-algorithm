@@ -1,61 +1,51 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 
-		String[] info = br.readLine().split(" ");
-		int N = Integer.parseInt(info[0]);
-		int M = Integer.parseInt(info[1]);
+		int N = sc.nextInt();
+		int M = sc.nextInt();
 
 		char[][] board = new char[N][M];
-		for (int n = 0; n < N; n++) {
-			char[] list = br.readLine().toCharArray();
 
-			for (int m = 0; m < M; m++) {
-				board[n][m] = list[m];
+		for (int i = 0; i < N; i++) {
+			String str = sc.next();
+
+			for (int k = 0; k < M; k++) {
+				board[i][k] = str.charAt(k);
 			}
 		}
 
-		int answer = Integer.MAX_VALUE;
+		int ans = Integer.MAX_VALUE;
 
 		for (int i = 0; i <= N - 8; i++) {
 
 			for (int k = 0; k <= M - 8; k++) {
-				char target = board[i][k];
+				int stone = board[i][k];
 
-				int num = check(board, k, i, target);
+				int cnt1 = 0;
+				int cnt2 = 0;
 
-				answer = Math.min(answer, num);
-			}
-		}
+				for (int y1 = i; y1 < i + 8; y1++) {
+					for (int x1 = k; x1 < k + 8; x1++) {
 
-		System.out.println(answer);
-	}
-
-	public static int check(char[][] board, int x, int y, char target) {
-		int diff1 = 0;
-		int diff2 = 0;
-
-		for (int i = y; i < y + 8; i++) {
-
-			for (int k = x; k < x + 8; k++) {
-				if (((i - y) % 2 == 0 && (k - x) % 2 == 0) || ((i - y) % 2 == 1 && (k - x) % 2 == 1)) {
-					if (board[i][k] != target)
-						diff1++;
-					else
-						diff2++;
-				} else {
-					if (board[i][k] == target)
-						diff1++;
-					else
-						diff2++;
+						if (i % 2 == y1 % 2) {
+							if (k % 2 == x1 % 2 && board[y1][x1] != stone) cnt1++;
+							else if (k % 2 != x1 % 2 && board[y1][x1] == stone) cnt1++;
+							else cnt2++;
+						} else if (i % 2 != y1 % 2) {
+							if (k % 2 == x1 % 2 && board[y1][x1] == stone) cnt1++;
+							else if (k % 2 != x1 % 2 && board[y1][x1] != stone) cnt1++;
+							else cnt2++;
+						}
+					}
 				}
+
+				ans = Math.min(ans, Math.min(cnt1, cnt2));
 			}
 		}
 
-		return Math.min(diff1, diff2);
+		System.out.print(ans);
 	}
 }
