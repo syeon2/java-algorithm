@@ -1,29 +1,24 @@
-import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         
-        int N = Integer.parseInt(br.readLine());
+        int N = sc.nextInt();
         
         Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < N; i++) {
-            int num = Integer.parseInt(br.readLine());
+        for (int n = 0; n < N; n++) {
+            int num = sc.nextInt();
             
             if (num == 0) stack.pop();
-            else stack.add(num);
+            else stack.push(num);
         }
         
         int ans = 0;
-        
-        while (!stack.isEmpty()) {
+        while (stack.size() > 0) {
             ans += stack.pop();
         }
         
-        bw.write(String.valueOf(ans));
-        bw.flush();
-        bw.close();
+        System.out.println(ans);
     }
 }
