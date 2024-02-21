@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -7,17 +6,21 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         int N = Integer.parseInt(br.readLine());
+        int[] list = new int[10001];
         
-        int[] list = new int[N];
         for (int i = 0; i < N; i++) {
-            list[i] = Integer.parseInt(br.readLine());
+            int idx = Integer.parseInt(br.readLine());
+            
+            list[idx]++;
         }
-        
-        Arrays.sort(list);
         
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.length; i++) {
-            sb.append(list[i]).append("\n");
+            int cnt = list[i];
+            
+            while (cnt-- > 0) {
+                sb.append(i).append("\n");
+            }
         }
         
         bw.write(sb.toString());
