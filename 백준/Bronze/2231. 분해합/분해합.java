@@ -1,39 +1,32 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-		int N = Integer.parseInt(br.readLine());
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        int start = 0;
+        int N = Integer.parseInt(br.readLine());
         
-        if (start <= 10) start /= 2;
-        else if (start <= 100) start -= 10;
-        else start -= 100;
-
-		for (int i = start; i <= N; i++) {
-			int num = d(i);
-
-			if (N == num) {
-				System.out.println(i);
-				return;
-			}
-		}
+        int ans = 0;
         
-        System.out.println(0);
-	}
-
-	public static int d(int num) {
-		int temp = num;
-
-		while (temp > 0) {
-			num += temp % 10;
-			temp /= 10;
-		}
-
-		return num;
-	}
+        for (int i = 1; i <= N; i++) {
+            
+            int temp = i;
+            int sum = temp;
+            
+            while (temp > 0) {
+                sum += (temp % 10);
+                temp /= 10;
+            }
+            
+            if (sum == N) {
+                ans = i;
+                break;
+            }
+        }
+        
+        bw.write(String.valueOf(ans));
+        bw.flush();
+        bw.close();
+    }
 }
