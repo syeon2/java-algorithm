@@ -6,31 +6,16 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String str = br.readLine();
+		String[] list = br.readLine().split("");
 
-		int num = Integer.parseInt(str);
-		int len = str.length();
+		Arrays.sort(list, Collections.reverseOrder());
 
-		int[] list = new int[len];
-
-		for (int i = 0; i < list.length; i++) {
-			int n = num % 10;
-			num /= 10;
-
-			list[i] = n;
+		String ans = "";
+		for (String s : list) {
+			ans = ans.concat(s);
 		}
 
-		Arrays.sort(list);
-
-		StringBuilder sb = new StringBuilder();
-
-		for (int i = list.length - 1; i >= 0; i--) {
-			sb.append(list[i]);
-		}
-
-		int answer = Integer.parseInt(sb.toString());
-
-		bw.write(String.valueOf(answer));
+		bw.write(ans);
 		bw.flush();
 		bw.close();
 	}
