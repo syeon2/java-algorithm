@@ -1,32 +1,27 @@
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st;
 		StringBuilder sb = new StringBuilder();
 
 		int N = Integer.parseInt(br.readLine());
-		StringTokenizer st;
 
-		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
+		for (int n = 0; n < N; n++) {
+			st = new StringTokenizer(br.readLine());
 
 			int H = Integer.parseInt(st.nextToken());
 			int W = Integer.parseInt(st.nextToken());
 			int P = Integer.parseInt(st.nextToken());
 
-			int ho = P / H;
-			if (P % H > 0) ho++;
+			int floor = P % H == 0 ? H : P % H;
+			int number = P % H == 0 ? P / H : (P / H) + 1;
 
-			int floor = P % H;
-			if (floor == 0) floor = H;
-
-			sb.append(floor);
-
-			if (ho < 10) sb.append(0);
-			sb.append(ho).append("\n");
+			if (number >= 10) sb.append(floor).append(number).append("\n");
+			else sb.append(floor).append("0").append(number).append("\n");
 		}
 
 		bw.write(sb.toString());
