@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,19 +6,22 @@ public class Main {
         
         int N = sc.nextInt();
         
-        Stack<Integer> stack = new Stack<>();
-        for (int n = 0; n < N; n++) {
+        int[] list = new int[N];
+        int idx = 0;
+        int ans = 0;
+        
+        while (N-- > 0) {
             int num = sc.nextInt();
             
-            if (num == 0) stack.pop();
-            else stack.push(num);
+            if (num > 0) {
+                list[idx++] = num;
+                ans += num;
+            } else {
+                ans -= list[--idx];
+                list[idx] = 0;
+            }
         }
         
-        int ans = 0;
-        while (stack.size() > 0) {
-            ans += stack.pop();
-        }
-        
-        System.out.println(ans);
+        System.out.print(ans);
     }
 }
