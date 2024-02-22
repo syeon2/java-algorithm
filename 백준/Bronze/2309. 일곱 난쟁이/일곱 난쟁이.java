@@ -1,34 +1,51 @@
 import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         int[] list = new int[9];
-        int total = 0;
-        
         for (int i = 0; i < 9; i++) {
-            int num = Integer.parseInt(br.readLine());
-                
-            list[i] = num;
-            total += num;
+            list[i] = Integer.parseInt(br.readLine());
         }
         
         Arrays.sort(list);
         
+        int a = -1;
+        int b = -1;
+        
         for (int i = 0; i < 9; i++) {
+            
             for (int k = i + 1; k < 9; k++) {
-                if (total - list[i] - list[k] == 100) {
-                    for (int j = 0; j < 9; j++) {
-                        if (j == i || j == k) continue;
-                        
-                        System.out.println(list[j]);
-                    }
+                
+                int sum = 0;
+                for (int j = 0; j < 9; j++) {
+                    if (j == i || j == k) continue;
                     
-                    return;
+                    sum += list[j];
+                }
+                
+                if (sum == 100) {
+                    a = i;
+                    b = k;
+                    break;
                 }
             }
+            
+            if ((a != -1 && b != -1)) break;
         }
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 9; i++) {
+            if (i == a || i == b) continue;
+            
+            sb.append(list[i]).append("\n");
+        }
+        
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
     }
 }
