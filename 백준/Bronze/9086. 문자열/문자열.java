@@ -8,11 +8,11 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         
         StringBuilder sb = new StringBuilder();
-        
         for (int n = 0; n < N; n++) {
             String str = br.readLine();
             
-            sb.append(str.charAt(0)).append(str.charAt(str.length() - 1)).append("\n");
+            if (str.length() >= 2) sb.append(str.charAt(0)).append(str.charAt(str.length() - 1)).append("\n");
+            else sb.append(str).append(str).append("\n");
         }
         
         bw.write(sb.toString());
