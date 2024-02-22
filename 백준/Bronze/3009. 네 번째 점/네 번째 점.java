@@ -1,37 +1,41 @@
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
-
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-		int x1 = Integer.parseInt(st.nextToken());
-		int y1 = Integer.parseInt(st.nextToken());
-
-		st = new StringTokenizer(br.readLine(), " ");
-
-		int x2 = Integer.parseInt(st.nextToken());
-		int y2 = Integer.parseInt(st.nextToken());
-
-		st = new StringTokenizer(br.readLine(), " ");
-
-		int x3 = Integer.parseInt(st.nextToken());
-		int y3 = Integer.parseInt(st.nextToken());
-
-		if (x1 == x2) sb.append(x3).append(" ");
-		else if (x1 == x3) sb.append(x2).append(" ");
-		else sb.append(x1).append(" ");
-
-		if (y1 == y2) sb.append(y3);
-		else if (y1 == y3) sb.append(y2);
-		else sb.append(y1);
-
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        int[] dx = new int[1001];
+        int[] dy = new int[1001];
+        
+        for (int i = 0; i < 3; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            
+            dx[x]++;
+            dy[y]++;
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 1001; i++) {
+            if (dx[i] == 1) {
+                sb.append(i).append(" ");
+                break;
+            }
+        }
+        
+        for (int i = 0; i < 1001; i++) {
+            if (dy[i] == 1) {
+                sb.append(i);
+                break;
+            }
+        }
+        
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+    }
 }
