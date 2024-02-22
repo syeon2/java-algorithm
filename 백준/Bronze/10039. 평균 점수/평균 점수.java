@@ -5,16 +5,15 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        int total = 0;
-        
+        int sum = 0;
         for (int i = 0; i < 5; i++) {
             int score = Integer.parseInt(br.readLine());
             
-            if (score < 40) total += 40;
-            else total += score;
+            if (score < 40) sum += 40;
+            else sum += score;
         }
         
-        bw.write(String.valueOf(total / 5));
+        bw.write(String.valueOf(sum / 5));
         bw.flush();
         bw.close();
     }
