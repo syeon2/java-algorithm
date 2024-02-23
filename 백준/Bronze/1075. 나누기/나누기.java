@@ -1,21 +1,28 @@
 import java.io.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-		int N = Integer.parseInt(br.readLine());
-		int F = Integer.parseInt(br.readLine());
-
-		int init = (N / 100) * 100;
-
-		for (int i = init; i < init + 100; i++) {
-			if (i % F == 0) {
-				String str = String.valueOf(i);
-
-				System.out.println(str.substring(str.length()- 2));
-				return;
-			}
-		}
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        int N = Integer.parseInt(br.readLine());
+        int F = Integer.parseInt(br.readLine());
+        
+        N = N / 100 * 100;
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 100; i++) {
+            if ((N + i) % F == 0) {
+                
+                if (i < 10) sb.append(0).append(i);
+                else sb.append(i);
+                
+                break;
+            }
+        }
+        
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+    }
 }
