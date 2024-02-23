@@ -5,31 +5,17 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		char[] aList = br.readLine().toCharArray();
-		char[] bList = br.readLine().toCharArray();
+		String str = br.readLine();
+		String s = br.readLine();
 
-		int count = 0;
-		int idx = 0;
+		int cnt = 0;
 
-		while (aList.length - idx >= bList.length) {
-			boolean flag = true;
-
-			for (int i = idx; i < idx + bList.length; i++) {
-				if (aList[i] != bList[i - idx]) {
-					flag = false;
-					break;
-				}
-			}
-
-			if (flag) {
-				count++;
-				idx += bList.length;
-			} else {
-				idx++;
-			}
+		while (str.indexOf(s) != -1) {
+			cnt++;
+			str = str.substring(str.indexOf(s) + 1 + s.length() - 1);
 		}
 
-		bw.write(String.valueOf(count));
+		bw.write(String.valueOf(cnt));
 		bw.flush();
 		bw.close();
 	}
