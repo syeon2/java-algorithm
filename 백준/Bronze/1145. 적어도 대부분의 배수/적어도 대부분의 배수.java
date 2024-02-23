@@ -1,35 +1,38 @@
 import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int a = Integer.parseInt(st.nextToken());
-		int b = Integer.parseInt(st.nextToken());
-		int c = Integer.parseInt(st.nextToken());
-		int d = Integer.parseInt(st.nextToken());
-		int e = Integer.parseInt(st.nextToken());
-
-		int n = 1;
-
-		while (true) {
-			int count = 0;
-
-			if (n % a == 0) count++;
-			if (n % b == 0) count++;
-			if (n % c == 0) count++;
-			if (n % d == 0) count++;
-			if (n % e == 0) count++;
-
-			if (count >= 3) break;
-			else n++;
-		}
-
-		bw.write(String.valueOf(n));
-		bw.flush();
-		bw.close();
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        Integer[] list = Arrays.stream(br.readLine().split(" ")).map(Integer::parseInt).toArray(Integer[]::new);
+        
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < list.length; i++) {
+            
+            for (int k = i + 1; k < list.length; k++) {
+                
+                for (int j = k + 1; j < list.length; j++) {
+                    int min = lcm(list[i], lcm(list[k], list[j]));
+                    
+                    ans = Math.min(ans, min);
+                }
+            }
+        }
+        
+        bw.write(String.valueOf(ans));
+        bw.flush();
+        bw.close();
+    }
+    
+    public static int lcm(int a, int b) {
+        return a * b / gcd(a, b);
+    }
+    
+    public static int gcd(int a, int b) {
+        if (b == 0) return a;
+        
+        return gcd(b, a % b);
+    }
 }
