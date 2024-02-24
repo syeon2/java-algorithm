@@ -1,45 +1,42 @@
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		int N = Integer.parseInt(br.readLine());
-
-		StringTokenizer st;
-		for (int n = 0; n < N; n++) {
-			st = new StringTokenizer(br.readLine(), " ");
-
-			int start = Integer.parseInt(st.nextToken());
-			int end = Integer.parseInt(st.nextToken());
-
-			int count = 0;
-
-			for (int i = start; i <= end; i++) {
-				if (i == 0) count++;
-				else count += countingZero(i);
-			}
-
-			bw.write(String.valueOf(count));
-			bw.newLine();
-		}
-
-		bw.flush();
-		bw.close();
-	}
-
-	public static int countingZero(int num) {
-		int temp = num;
-
-		int count = 0;
-		while (temp != 0) {
-			if (temp % 10 == 0) count++;
-
-			temp /= 10;
-		}
-
-		return count;
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
+        
+        int T = Integer.parseInt(br.readLine());
+        
+        for (int t = 0; t < T; t++) {
+            st = new StringTokenizer(br.readLine());
+            
+            int N = Integer.parseInt(st.nextToken());
+            int M = Integer.parseInt(st.nextToken());
+            
+            int cnt = 0;
+            for (int i = N; i <= M; i++) {
+                cnt += countZero(i);
+            }
+            
+            sb.append(cnt).append("\n");
+        }
+        
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+    }
+    
+    public static int countZero(int n) {
+        char[] list = String.valueOf(n).toCharArray();
+        
+        int cnt = 0;
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == '0') cnt++;
+        }
+        
+        return cnt;
+    }
 }
