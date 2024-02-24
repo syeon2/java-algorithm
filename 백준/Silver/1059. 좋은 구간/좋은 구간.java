@@ -1,36 +1,40 @@
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		int L = Integer.parseInt(br.readLine());
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int N = Integer.parseInt(br.readLine());
-
-		int min = 0;
-		int max = Integer.MAX_VALUE;
-
-		for (int i = 0; i < L; i++) {
-			int num = Integer.parseInt(st.nextToken());
-
-			if (N > num && min < num) min = num;
-			if (N < num && max > num) max = num;
-
-			if (N == num) {
-				bw.write(String.valueOf(0));
-				bw.flush();
-				bw.close();
-				return;
-			}
-		}
-
-		int total = (N - min) * (max - N) - 1;
-
-		bw.write(String.valueOf(total));
-		bw.flush();
-		bw.close();
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        int N = Integer.parseInt(br.readLine());
+        
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] list = new int[N];
+        for (int i = 0; i < N; i++) {
+            list[i] = Integer.parseInt(st.nextToken());
+        }
+        
+        int n = Integer.parseInt(br.readLine());
+        
+        int min = 0;
+        int max = Integer.MAX_VALUE;
+        
+        for (int i = 0; i < N; i++) {
+            if (n >= list[i] && min <= list[i]) min = list[i];
+            if (n <= list[i] && max >= list[i]) max = list[i];
+        }
+        
+        if (min == n) bw.write("0");
+        else {
+            int start = n - (min + 1);
+            int middle = max - n;
+            
+            int end = max - 1 - n;
+            
+            bw.write(String.valueOf((start * middle) + end));
+        }
+        
+        bw.flush();
+        bw.close();
+    }
 }
