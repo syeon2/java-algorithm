@@ -7,43 +7,23 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         StringTokenizer st = new StringTokenizer(br.readLine());
+        
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
         int c = Integer.parseInt(st.nextToken());
         
         int N = Integer.parseInt(st.nextToken());
         
-        boolean ans = false;
-        
-        int aCnt = 0;
-        while (aCnt * a <= N) {
-            
-            int bCnt = 0;
-            while ((aCnt * a) + (bCnt * b) <= N) {
-                
-                int cCnt = 0;
-                
-                while ((aCnt * a) + (bCnt * b) + (cCnt * c) <= N) {
-                    
-                    if ((aCnt + a) + (bCnt * b) + (cCnt * c) == N) {
-                        ans = true;
-                        break;
-                    }
-                    
-                    cCnt++;
+        int ans = 0;
+        for (int i = 0; i <= 50; i++) {
+            for (int k = 0; k <= 50; k++) {
+                for (int j = 0; j <= 50; j++) {
+                    if ((a * i) + (k * b) + (j * c) == N) ans = 1;
                 }
-                
-                if (ans) break;
-                bCnt++;
             }
-            
-            if (ans) break;
-            aCnt++;
         }
         
-        if (ans) bw.write("1");
-        else bw.write("0");
-        
+        bw.write(String.valueOf(ans));
         bw.flush();
         bw.close();
     }
