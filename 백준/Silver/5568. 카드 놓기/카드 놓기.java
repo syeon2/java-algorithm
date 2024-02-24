@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+
+	public static Set<Integer> set = new HashSet<>();
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -10,66 +13,31 @@ public class Main {
 		int K = Integer.parseInt(br.readLine());
 
 		int[] list = new int[N];
+		boolean[] isUse = new boolean[N];
 
 		for (int i = 0; i < N; i++) {
 			list[i] = Integer.parseInt(br.readLine());
 		}
 
-		Set<Integer> set = new HashSet<>();
-		StringBuilder sb;
-
-		if (K == 2) {
-			for (int i = 0; i < N; i++) {
-				for (int k = 0; k < N; k++) {
-					if (k == i) continue;
-
-					sb = new StringBuilder();
-
-					sb.append(list[i]).append(list[k]);
-
-					set.add(Integer.parseInt(sb.toString()));
-				}
-			}
-		} else if (K == 3) {
-			for (int i = 0; i < N; i++) {
-				for (int k = 0; k < N; k++) {
-					if (i == k) continue;;
-
-					for (int j = 0; j < N; j++) {
-						if (i == j || k == j) continue;
-
-						sb = new StringBuilder();
-
-						sb.append(list[i]).append(list[k]).append(list[j]);
-
-						set.add(Integer.parseInt(sb.toString()));
-					}
-				}
-			}
-		} else if (K == 4) {
-			for (int i = 0; i < N; i++) {
-				for (int k = 0; k < N; k++) {
-					if (i == k) continue;
-
-					for (int j = 0; j < N; j++) {
-						if (i == j || k == j) continue;
-
-						for (int z = 0; z < N; z++) {
-							if (z == i || z == k || z == j) continue;
-
-							sb = new StringBuilder();
-
-							sb.append(list[i]).append(list[k]).append(list[j]).append(list[z]);
-
-							set.add(Integer.parseInt(sb.toString()));
-						}
-					}
-				}
-			}
-		}
+		recur(isUse, list, K, "");
 
 		bw.write(String.valueOf(set.size()));
 		bw.flush();
 		bw.close();
+	}
+
+	public static void recur(boolean[] isUse, int[] list, int k, String str) {
+		if (k == 0) {
+			set.add(Integer.parseInt(str));
+			return;
+		}
+
+		for (int i = 0; i < list.length; i++) {
+			if (isUse[i]) continue;
+
+			isUse[i] = true;
+			recur(isUse, list, k - 1, str.concat(String.valueOf(list[i])));
+			isUse[i] = false;
+		}
 	}
 }
