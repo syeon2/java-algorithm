@@ -7,25 +7,27 @@ public class Main {
 
 		int N = Integer.parseInt(br.readLine());
 
-		int count = 0;
+		int ans = 0;
 
 		for (int i = 1; i <= N; i++) {
-			count += getClap(i);
+			int clap = countClap(i);
+
+			ans += clap;
 		}
 
-		bw.write(String.valueOf(count));
+		bw.write(String.valueOf(ans));
 		bw.flush();
 		bw.close();
 	}
 
-	public static int getClap(int num) {
-		int count = 0;
+	public static int countClap(int n) {
+		int cnt = 0;
 
-		while (num != 0) {
-			if (num % 10 == 3 || num % 10 == 6 || num % 10 == 9) count++;
-			num /= 10;
+		while (n > 0) {
+			if (n % 10 == 3 || n % 10 == 6 || n % 10 == 9) cnt++;
+			n /= 10;
 		}
 
-		return count;
+		return cnt;
 	}
 }
