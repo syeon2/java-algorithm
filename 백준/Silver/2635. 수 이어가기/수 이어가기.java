@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
@@ -8,50 +7,58 @@ public class Main {
 
 		int N = Integer.parseInt(br.readLine());
 
-		List<Integer> list = new ArrayList<>();
+		int maxNum = 0;
+		int maxCnt = 0;
 
-		for (int i = 1; i <= N; i++) {
-			List<Integer> newList = getList(N, i);
+		for (int i = N; i >= 1; i--) {
 
-			if (list.size() < newList.size()) {
-				list = newList;
+			int prev = N;
+			int cur = i;
+
+			int tempCnt = 2;
+			while (true) {
+				int next = prev - cur;
+
+				if (next >= 0) tempCnt++;
+				else break;
+
+				prev = cur;
+				cur = next;
+				tempCnt++;
+			}
+
+			if (maxCnt < tempCnt) {
+				maxNum = i;
+				maxCnt = tempCnt;
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		int prev = N;
+		int cur = maxNum;
 
-		for (int i = 0; i < list.size(); i++) {
-			sb.append(list.get(i)).append(" ");
+		StringBuilder sb = new StringBuilder();
+		sb.append(prev).append(" ").append(cur).append(" ");
+
+		int cntAns = 2;
+
+		while (true) {
+			int next = prev - cur;
+
+			prev = cur;
+			cur = next;
+
+			if (cur >= 0) {
+				sb.append(cur).append(" ");
+				cntAns++;
+			}
+			else break;
 		}
-		
-		bw.write(String.valueOf(list.size()));
+
+		bw.write(String.valueOf(cntAns));
 		bw.newLine();
 		bw.write(sb.toString());
+
 		bw.flush();
 		bw.close();
-	}
-
-	public static List<Integer> getList(int init, int num) {
-		List<Integer> list = new ArrayList<>();
-		int count = 2;
-
-		int prev = init;
-		int next = num;
-
-		list.add(init);
-		list.add(num);
-
-		while (prev - next >= 0) {
-			count++;
-
-			int temp = next;
-
-			next = prev - next;
-			prev = temp;
-
-			list.add(next);
-		}
-
-		return list;
 	}
 }
