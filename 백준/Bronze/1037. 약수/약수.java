@@ -9,14 +9,18 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int[] list = new int[N];
+        int min = Integer.MAX_VALUE;
+        int max = 0;
+
         for (int i = 0; i < N; i++) {
-            list[i] = Integer.parseInt(st.nextToken());
+            int num = Integer.parseInt(st.nextToken());
+
+            if (min > num) min = num;
+            if (max < num) max = num;
         }
 
-        Arrays.sort(list);
 
-        bw.write(String.valueOf(list[0] * list[list.length - 1]));
+        bw.write(String.valueOf(min * max));
         bw.flush();
         bw.close();
     }
