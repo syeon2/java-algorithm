@@ -1,66 +1,31 @@
-import java.math.BigInteger;
+import java.util.*;
 
 class Solution {
     public int solution(int n, int k) {
-        String str = convertNotation(n, k);
+        String transNum = Integer.toString(n, k);
+
+        String[] numList = Arrays.stream(transNum.split("0"))
+                .filter(s -> !s.isBlank())
+                .toArray(String[]::new);
 
         int ans = 0;
+        for (String s : numList) {
+            long num = Long.parseLong(s);
 
-        int prevIdx = -1;
-        int cnt = 0;
-
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '0' && prevIdx == -1 && cnt > 0) {
-                String substring = str.substring(0, i);
-
-                BigInteger subNum = new BigInteger(substring);
-
-                if (subNum.isProbablePrime(10)) {
-                    ans++;
-                    prevIdx = i;
-                    cnt = 0;
-                } else {
-                    prevIdx = i;
-                    cnt = 0;
-                }
-            } else if (str.charAt(i) == '0' && cnt > 0) {
-                String substring = str.substring(prevIdx + 1, i);
-
-                BigInteger subNum = new BigInteger(substring);
-
-                if (subNum.isProbablePrime(10)) {
-                    ans++;
-                    prevIdx = i;
-                    cnt = 0;
-                } else {
-                    prevIdx = i;
-                    cnt = 0;
-                }
-            } else cnt++;
-        }
-
-        if (cnt > 0) {
-            String substring = str.substring(prevIdx + 1);
-
-            BigInteger subNum = new BigInteger(substring);
-
-            if (subNum.isProbablePrime(10)) ans++;
+            if (checkPrime(num)) ans++;
         }
 
         return ans;
     }
-    
-        public String convertNotation(int n, int k) {
-        StringBuilder sb = new StringBuilder();
 
-        while (n > 0) {
-            int temp = n % k;
+    public boolean checkPrime(long num) {
+        if (num <= 1) return false;
+        else if (num == 2 || num == 3) return true;
 
-            sb.insert(0, temp);
-
-            n /= k;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) return false;
         }
 
-        return sb.toString();
+        return true;
     }
 }
