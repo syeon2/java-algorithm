@@ -2,33 +2,36 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int N = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
 
-		int[] aList = new int[N];
-		int[] bList = new int[N];
+        Integer[] aList = new Integer[N];
+        Integer[] bList = new Integer[N];
 
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		StringTokenizer st2 = new StringTokenizer(br.readLine(), " ");
-		for (int i = 0; i < N; i++) {
-			aList[i] = Integer.parseInt(st.nextToken());
-			bList[i] = Integer.parseInt(st2.nextToken());
-		}
+        String[] temp = br.readLine().split(" ");
+        for (int i = 0; i < N; i++) {
+            aList[i] = Integer.parseInt(temp[i]);
+        }
 
-		Arrays.sort(aList);
-		Arrays.sort(bList);
+        temp = br.readLine().split(" ");
+        for (int i = 0; i < N; i++) {
+            bList[i] = Integer.parseInt(temp[i]);
+        }
 
-		int total = 0;
+        Arrays.sort(aList);
+        Arrays.sort(bList, Collections.reverseOrder());
 
-		for (int i = 0; i < N; i++) {
-			total += aList[i] * bList[N - 1 - i];
-		}
+        int ans = 0;
 
-		bw.write(String.valueOf(total));
-		bw.flush();
-		bw.close();
-	}
+        for (int i = 0; i < N; i++) {
+            ans += (aList[i] * bList[i]);
+        }
+
+        bw.write(String.valueOf(ans));
+        bw.flush();
+        bw.close();
+    }
 }
