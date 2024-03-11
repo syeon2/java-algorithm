@@ -1,56 +1,45 @@
 import java.io.*;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
 
-		StringBuilder sb = new StringBuilder();
-		String str;
+        while (true) {
+            String str = br.readLine();
 
-		while (!(str = br.readLine()).equals(".")) {
+            if (str.equals(".")) break;
 
-			Stack<Character> stack = new Stack<>();
-			boolean flag = true;
+            boolean ans = true;
 
-			for (int i = 0; i < str.length(); i++) {
-				if (str.charAt(i) == '(' || str.charAt(i) == '[') stack.add(str.charAt(i));
-				else if (str.charAt(i) == ')') {
-					if (stack.isEmpty()) {
-						sb.append("no").append("\n");
-						flag = false;
-						break;
-					}
+            Stack<Character> stack = new Stack<>();
 
-					if (stack.peek() == '(') stack.pop();
-					else {
-						sb.append("no").append("\n");
-						flag = false;
-						break;
-					}
-				} else if (str.charAt(i) == ']') {
-					if (stack.isEmpty()) {
-						sb.append("no").append("\n");
-						flag = false;
-						break;
-					}
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) == '(' || str.charAt(i) == '[') {
+                    stack.add(str.charAt(i));
+                } else if (str.charAt(i) == ')') {
+                    if (!stack.isEmpty() && stack.peek() == '(') stack.pop();
+                    else {
+                        ans = false;
+                        break;
+                    }
+                } else if (str.charAt(i) == ']') {
+                    if (!stack.isEmpty() && stack.peek() == '[') stack.pop();
+                    else {
+                        ans = false;
+                        break;
+                    }
+                }
+            }
 
-					if (stack.peek() == '[') stack.pop();
-					else {
-						sb.append("no").append("\n");
-						flag = false;
-						break;
-					}
-				}
-			}
+            if (ans && stack.isEmpty()) sb.append("yes").append("\n");
+            else sb.append("no").append("\n");
+        }
 
-			if (flag && stack.isEmpty()) sb.append("yes").append("\n");
-			if (flag && !stack.isEmpty()) sb.append("no").append("\n");
-		}
-
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
-	}
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+    }
 }
