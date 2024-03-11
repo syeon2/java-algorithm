@@ -1,43 +1,36 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
 
-		int N = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
+        int[] plusList = new int[10000001];
+        int[] minusList = new int[10000001];
 
-		boolean[] minusList = new boolean[10000001];
-		boolean[] plusList = new boolean[10000001];
+        String[] nums = br.readLine().split(" ");
+        for (int i = 0; i < N; i++) {
+            int num = Integer.parseInt(nums[i]);
 
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		for (int i = 0; i < N; i++) {
-			int num = Integer.parseInt(st.nextToken());
+            if (num >= 0) plusList[num]++;
+            else minusList[num * -1]++;
+        }
 
-			if (num >= 0) plusList[num] = true;
-			else minusList[num * -1] = true;
-		}
+        N = Integer.parseInt(br.readLine());
+        nums = br.readLine().split(" ");
 
-		StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            int num = Integer.parseInt(nums[i]);
 
-		int M = Integer.parseInt(br.readLine());
+            if (num >= 0 && plusList[num] > 0) sb.append(1).append(" ");
+            else if (num < 0 && minusList[num * -1] > 0) sb.append(1).append(" ");
+            else sb.append(0).append(" ");
+        }
 
-		st = new StringTokenizer(br.readLine(), " ");
-		for (int i = 0; i < M; i++) {
-			int num = Integer.parseInt(st.nextToken());
-
-			if (num >= 0) {
-				if (plusList[num]) sb.append(1).append(" ");
-				else sb.append(0).append(" ");
-			} else {
-				if (minusList[num * -1]) sb.append(1).append(" ");
-				else sb.append(0).append(" ");
-			}
-		}
-
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
-	}
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+    }
 }
