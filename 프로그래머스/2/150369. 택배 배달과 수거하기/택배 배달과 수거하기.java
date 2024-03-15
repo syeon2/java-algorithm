@@ -1,52 +1,62 @@
 import java.util.*;
 
 class Solution {
-    public long solution(int cap, int n, int[] d, int[] p) {
+    public long solution(int cap, int n, int[] deliveries, int[] pickups) {
         
         long answer = 0;
-        int len = d.length;
-        //val, idx
-        LinkedList<int[]> l1 = new LinkedList<>();
-        LinkedList<int[]> l2 = new LinkedList<>();
-        for(int i =0 ;i < len; i++){
-            if(d[i] > 0)
-                l1.add(new int[]{d[i], i+1});
-            if(p[i] > 0)
-                l2.add(new int[]{p[i], i+1});
+        
+        Stack<Parcel> delStack = new Stack<>();
+        Stack<Parcel> pickStack = new Stack<>();
+        
+        for (int i = 0 ; i < deliveries.length; i++){
+            if (deliveries[i] > 0) delStack.add(new Parcel(deliveries[i], i + 1));
+            if (pickups[i] > 0) pickStack.add(new Parcel(pickups[i], i + 1));
         }
-        int sum =0 ;
-        int dist = 0;
-        while(!l1.isEmpty() || !l2.isEmpty()){
-            sum =0;
-            dist = 0;
-            while(!l1.isEmpty() && sum < cap){
-                int[] c = l1.pollLast();
-                dist = Math.max(dist, c[1]);
+        
+        while (!delStack.isEmpty() || !pickStack.isEmpty()) {
+            int sum = 0;
+            int dist = 0;
+            
+            while (!delStack.isEmpty() && sum < cap) {
+                Parcel parcel = delStack.pop();
+                dist = Math.max(dist, parcel.dist);
                 
-                if(c[0] + sum <= cap){
-                    sum +=c[0];
-                }else{
-                    c[0] -= (cap - sum);
-                    l1.add(c);
+                if (parcel.count + sum <= cap) {
+                    sum += parcel.count;
+                } else {
+                    parcel.count -= (cap - sum);
+                    delStack.add(parcel);
                     break;
                 }
             }
+            
             sum = 0;
-            while(!l2.isEmpty() && sum < cap){
-                int[] c = l2.pollLast();
-                dist = Math.max(dist, c[1]);
+            while (!pickStack.isEmpty() && sum < cap){
+                Parcel parcel = pickStack.pop();
+                dist = Math.max(dist, parcel.dist);
                 
-                if(c[0] + sum <= cap){
-                    sum +=c[0];
-                }else{
-                    c[0] -= (cap - sum);
-                    l2.add(c);
+                if (parcel.count + sum <= cap) {
+                    sum += parcel.count;
+                } else {
+                    parcel.count -= (cap - sum);
+                    pickStack.add(parcel);
                     break;
                 }
             }
-            answer += dist*2;
+            
+            answer += (dist * 2);
         }
         
         return answer;
+    }
+    
+    public class Parcel {
+        public int count;
+        public int dist;
+        
+        public Parcel(int count, int dist) {
+            this.count = count;
+            this.dist = dist;
+        }
     }
 }
