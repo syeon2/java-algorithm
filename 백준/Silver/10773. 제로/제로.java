@@ -1,27 +1,25 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
+
         int N = sc.nextInt();
-        
-        int[] list = new int[N];
-        int idx = 0;
-        int ans = 0;
-        
-        while (N-- > 0) {
+        Stack<Integer> stack = new Stack<>();
+
+        for (int n = 0; n < N; n++) {
             int num = sc.nextInt();
-            
-            if (num > 0) {
-                list[idx++] = num;
-                ans += num;
-            } else {
-                ans -= list[--idx];
-                list[idx] = 0;
-            }
+
+            if (num == 0) stack.pop();
+            else stack.push(num);
         }
-        
-        System.out.print(ans);
+
+        int sum = 0;
+        while (!stack.isEmpty()) {
+            sum += stack.pop();
+        }
+
+        System.out.print(sum);
     }
 }
