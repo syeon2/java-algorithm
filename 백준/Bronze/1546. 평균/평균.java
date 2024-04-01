@@ -1,33 +1,31 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		int N = Integer.parseInt(br.readLine());
-
-		int[] list = new int[N];
-
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-		int max = 0;
-		for (int i = 0; i < N; i++) {
-			int num = Integer.parseInt(st.nextToken());
-			list[i] = num;
-
-			if (max < num) max = num;
-		}
-
-		double ans = 0;
-
-		for (int i = 0; i < N; i++) {
-			ans += (double) list[i] / (double) (max * 100);
-		}
-
-		bw.write(String.valueOf(ans / N * 10000));
-		bw.flush();
-		bw.close();
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        int N = Integer.parseInt(br.readLine());
+        
+        int[] list = new int[N];
+        int M = 0;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            list[i] = Integer.parseInt(st.nextToken());
+            if (M < list[i]) M = list[i];
+        }
+        
+        double avg = 0;
+        
+        for (int i = 0; i < N; i++) {
+            avg += ((double) list[i] / M * 100);
+        }
+        
+        avg /= N;
+        
+        bw.write(String.valueOf(avg));
+        bw.flush();
+        bw.close();
+    }
 }
