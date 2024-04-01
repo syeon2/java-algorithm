@@ -6,9 +6,12 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         String[] list = br.readLine().trim().split(" ");
+       
+        int ans = 0;
         
-        if (list[0].equals("")) bw.write("0");
-        else bw.write(String.valueOf(list.length));
+        if (!list[0].equals("")) ans = list.length;
+        
+        bw.write(String.valueOf(ans));
         bw.flush();
         bw.close();
     }
