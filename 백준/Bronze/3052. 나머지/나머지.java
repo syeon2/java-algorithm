@@ -13,12 +13,12 @@ public class Main {
             list[num % 42]++;
         }
         
-        int cnt = 0;
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] > 0) cnt++;
+        int ans = 0;
+        for (int i = 0; i < 42; i++) {
+            if (list[i] >= 1) ans++;
         }
-        
-        bw.write(String.valueOf(cnt));
+
+        bw.write(String.valueOf(ans));
         bw.flush();
         bw.close();
     }
