@@ -7,24 +7,23 @@ public class Main {
         
         int N = Integer.parseInt(br.readLine());
         
+        StringBuilder sb = new StringBuilder();
+        
         for (int n = 0; n < N; n++) {
             char[] list = br.readLine().toCharArray();
             
             int score = 0;
-            int repeat = 0;
             
+            int cnt = 0;
             for (int i = 0; i < list.length; i++) {
-                if (list[i] == 'X') repeat = 0;
-                else {
-                    repeat += 1;
-                    score += repeat;
-                }
+                if (list[i] == 'O') score += ++cnt;
+                else cnt = 0;
             }
             
-            bw.write(String.valueOf(score));
-            bw.newLine();
+            sb.append(score).append("\n");
         }
         
+        bw.write(sb.toString());
         bw.flush();
         bw.close();
     }
