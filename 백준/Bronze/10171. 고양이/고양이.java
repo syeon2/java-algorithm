@@ -6,13 +6,10 @@ public class Main {
 
 		bw.write("\\    /\\");
 		bw.newLine();
-
 		bw.write(" )  ( ')");
 		bw.newLine();
-
 		bw.write("(  /  )");
 		bw.newLine();
-
 		bw.write(" \\(__)|");
 
 		bw.flush();
