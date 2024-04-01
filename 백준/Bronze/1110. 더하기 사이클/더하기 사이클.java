@@ -1,3 +1,6 @@
+// 1. 주어진 수의 각 자리수를 더한다.
+// 2. 원래 수의 1의자리 값 + " " + 자리수를 더한 1의 자리 값
+
 import java.io.*;
 
 public class Main {
@@ -6,33 +9,30 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         int N = Integer.parseInt(br.readLine());
+        int tempN = concatNum(N, sumPos(N));
+        int ans = 1;
         
-        int M = N;
+        while (N != tempN) {
+            ans++;
+            tempN = concatNum(tempN, sumPos(tempN));
+        }
         
-        int cnt = 0;
-        do {
-            String temp = String.valueOf(N);
-            if (temp.length() == 1) temp = "0".concat(temp);
-            
-            int sum = 0;
-            for (int i = 0; i < temp.length(); i++) {
-                sum += (temp.charAt(i) - '0');
-            }
-            
-            String strSum = String.valueOf(sum);
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(temp.charAt(temp.length() - 1))
-                .append(strSum.charAt(strSum.length() - 1));
-            
-            int newNum = Integer.parseInt(sb.toString());
-            
-            N = newNum;
-            cnt++;
-        } while (N != M);
-        
-        bw.write(String.valueOf(cnt));
+        bw.write(String.valueOf(ans));
         bw.flush();
         bw.close();
+    }
+    
+    public static int concatNum(int base, int sum) {
+        int a = base % 10;
+        int b = sum % 10;
+        
+        return (a * 10) + b;
+    }
+    
+    public static int sumPos(int num) {
+        int a = num / 10;
+        int b = num % 10;
+        
+        return a + b;
     }
 }
