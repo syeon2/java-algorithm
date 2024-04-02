@@ -7,38 +7,30 @@ public class Main {
         
         int N = Integer.parseInt(br.readLine());
         
-        int cnt = 0;
+        int ans = 0;
+        
         for (int n = 0; n < N; n++) {
-            String str = br.readLine();
+            char[] list = br.readLine().toCharArray();
             
-            if (check(str)) cnt++;
-        }
-        
-        bw.write(String.valueOf(cnt));
-        bw.flush();
-        bw.close();
-    }
-    
-    public static boolean check(String str) {
-        boolean[] cList = new boolean[26];
-        char[] sList = str.toCharArray();
-        
-        char curC = sList[0];
-        cList[curC - 'a'] = true;
-        
-        for (int i = 1; i < sList.length; i++) {
-            if (sList[i] == curC) continue;
-            else {
-                int idx = sList[i] - 'a';
-                
-                if (cList[idx]) return false;
-                else {
-                    cList[idx] = true;
-                    curC = sList[i];
+            boolean isNot = false;
+            boolean[] alp = new boolean[26];
+            int curChar = 0;
+            
+            for (int i = 0; i < list.length; i++) {
+                if (curChar != list[i] && !alp[list[i] - 'a']) {
+                    curChar = list[i];
+                    alp[list[i] - 'a'] = true;
+                } else if (curChar != list[i] && alp[list[i] - 'a']) {
+                    isNot = true;
+                    break;
                 }
             }
+            
+            if (!isNot) ans++;
         }
         
-        return true;
+        bw.write(String.valueOf(ans));
+        bw.flush();
+        bw.close();
     }
 }
