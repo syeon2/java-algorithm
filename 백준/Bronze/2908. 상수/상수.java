@@ -1,30 +1,34 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        
         StringTokenizer st = new StringTokenizer(br.readLine());
-        String A = st.nextToken();
-        String B = st.nextToken();
         
-        int reA = Integer.parseInt(reverse(A));
-        int reB = Integer.parseInt(reverse(B));
+        int f = Integer.parseInt(st.nextToken());
+        int s = Integer.parseInt(st.nextToken());
         
-        bw.write(String.valueOf(Math.max(reA, reB)));
+        int rF = reverse(f);
+        int rS = reverse(s);
+        
+        bw.write(String.valueOf(Math.max(rF, rS)));
         bw.flush();
         bw.close();
     }
     
-    public static String reverse(String n) {
-        StringBuilder sb = new StringBuilder();
+    public static int reverse(int num) {
+        int pos = 100;
+        int rev = 0;
         
-        for (int i = n.length() - 1; i >= 0; i--) {
-            sb.append(n.charAt(i));
+        while (pos > 0) {
+            int temp = num % 10;
+            rev += temp * pos;
+            num /= 10;
+            pos /= 10;
         }
         
-        return sb.toString();
+        return rev;
     }
 }
