@@ -7,27 +7,27 @@ public class Main {
         
         int N = Integer.parseInt(br.readLine());
         
-        if (N < 100) bw.write(String.valueOf(N));
-        else {
-            int cnt = 99;
-            
-            for (int i = 100; i <= N; i++) {
-                if (check(i)) cnt++;
+        int ans = 0;
+        
+        for (int i = 1; i <= N; i++) {
+            if (i < 10) ans++;
+            else {
+                if (isSpecial(i)) ans++;
             }
-            
-            bw.write(String.valueOf(cnt));
         }
         
+        bw.write(String.valueOf(ans));
         bw.flush();
         bw.close();
     }
     
-    public static boolean check(int n) {
-        int sub = ((n % 100) / 10) - (n % 10);
+    public static boolean isSpecial(int num) {
+        char[] list = String.valueOf(num).toCharArray();
         
-        String temp = String.valueOf(n);
-        for (int i = 0; i < temp.length() - 1; i++) {
-            if (temp.charAt(i) - temp.charAt(i + 1) != sub) return false;
+        int gap = list[1] - list[0];
+        
+        for (int i = 1; i < list.length; i++) {
+            if (list[i] - list[i - 1] != gap) return false;
         }
         
         return true;
