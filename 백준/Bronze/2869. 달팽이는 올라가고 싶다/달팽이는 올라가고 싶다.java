@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -7,16 +7,18 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         StringTokenizer st = new StringTokenizer(br.readLine());
-        
         int A = Integer.parseInt(st.nextToken());
         int B = Integer.parseInt(st.nextToken());
-        
         int V = Integer.parseInt(st.nextToken());
         
-        int day = ((V - A) / (A - B)) + 1;
-        if ((V - A) % (A - B) > 0) day++;
+        int ans = 1;
         
-        bw.write(String.valueOf(day));
+        int remain = V - A;
+        
+        ans += remain / (A - B);
+        if (remain % (A - B) > 0) ans++;
+        
+        bw.write(String.valueOf(ans));
         bw.flush();
         bw.close();
     }
