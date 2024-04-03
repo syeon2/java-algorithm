@@ -10,7 +10,7 @@ public class Main {
         int ans = 0;
         
         for (int i = 0; i < list.length; i++) {
-            ans += getSecond(list[i]);
+            ans += getSeconds(list[i]);
         }
         
         bw.write(String.valueOf(ans));
@@ -18,14 +18,14 @@ public class Main {
         bw.close();
     }
     
-    public static int getSecond(char c) {
-        if (c <= 'C') return 3;
-        else if (c <= 'F') return 4;
-        else if (c <= 'I') return 5;
-        else if (c <= 'L') return 6;
-        else if (c <= 'O') return 7;
-        else if (c <= 'S') return 8;
-        else if (c <= 'V') return 9;
+    public static int getSeconds(char c) {
+        if (c >= 'A' && c <= 'C') return 3;
+        else if (c >= 'D' && c <= 'F') return 4;
+        else if (c >= 'G' && c <= 'I') return 5;
+        else if (c >= 'J' && c <= 'L') return 6;
+        else if (c >= 'M' && c <= 'O') return 7;
+        else if (c >= 'P' && c <= 'S') return 8;
+        else if (c >= 'T' && c <= 'V') return 9;
         else return 10;
     }
 }
