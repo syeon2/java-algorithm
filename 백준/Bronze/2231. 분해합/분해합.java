@@ -9,17 +9,8 @@ public class Main {
         
         int ans = 0;
         
-        for (int i = 1; i <= N; i++) {
-            
-            int temp = i;
-            int sum = temp;
-            
-            while (temp > 0) {
-                sum += (temp % 10);
-                temp /= 10;
-            }
-            
-            if (sum == N) {
+        for (int i = 1; i <= 1000000; i++) {
+            if (devideSum(i) == N) {
                 ans = i;
                 break;
             }
@@ -28,5 +19,16 @@ public class Main {
         bw.write(String.valueOf(ans));
         bw.flush();
         bw.close();
+    }
+    
+    public static int devideSum(int num) {
+        int sum = num;
+        
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        
+        return sum;
     }
 }
