@@ -15,23 +15,17 @@ public class Main {
         }
 
         int[] ans = new int[N + 1];
-        ans[1] = 0;
 
         Stack<Node> stack = new Stack<>();
         for (int i = 1; i <= N; i++) {
-            if (stack.isEmpty()) {
-                stack.add(list[i]);
-                ans[i] = 0;
-            } else {
-                while (!stack.isEmpty() && stack.peek().num < list[i].num) {
-                    Node poped = stack.pop();
+            while (!stack.isEmpty() && stack.peek().num < list[i].num) {
+                Node poped = stack.pop();
 
-                    if (!stack.isEmpty()) ans[poped.idx] = stack.peek().idx;
-                    else ans[poped.idx] = 0;
-                }
-
-                stack.add(list[i]);
+                if (!stack.isEmpty()) ans[poped.idx] = stack.peek().idx;
+                else ans[poped.idx] = 0;
             }
+
+            stack.add(list[i]);
         }
 
         while (!stack.isEmpty()) {
