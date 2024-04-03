@@ -5,12 +5,13 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         StringBuilder sb = new StringBuilder();
-        sb.append("         ,r'\"7\n")
-            .append("r`-_   ,'  ,/\n")
-            .append(" \\. \". L_r'\n")
-            .append("   `~\\/\n")
-            .append("      |\n")
-            .append("      |\n");
+        
+        sb.append("         ,r'\"7").append("\n")
+            .append("r`-_   ,'  ,/").append("\n")
+            .append(" \\. \". L_r'").append("\n")
+            .append("   `~\\/").append("\n")
+            .append("      |").append("\n")
+            .append("      |");
         
         bw.write(sb.toString());
         bw.flush();
