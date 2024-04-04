@@ -5,20 +5,18 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
         
         int N = Integer.parseInt(br.readLine());
-        int[][] list = new int[N][2];
         
-        for (int i = 0; i < N; i++) {
+        int[][] list = new int[N][2];
+            
+        for (int n = 0; n < N; n++) {
             st = new StringTokenizer(br.readLine());
             
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-            
-            list[i][0] = x;
-            list[i][1] = y;
+            list[n][0] = Integer.parseInt(st.nextToken());
+            list[n][1] = Integer.parseInt(st.nextToken());
         }
         
         Arrays.sort(list, new Comparator<>() {
@@ -32,8 +30,8 @@ public class Main {
             }
         });
         
-        for (int i = 0; i < N; i++) {
-            sb.append(list[i][0]).append(" ").append(list[i][1]).append("\n");
+        for (int n = 0; n < N; n++) {
+            sb.append(list[n][0]).append(" ").append(list[n][1]).append("\n");
         }
         
         bw.write(sb.toString());
