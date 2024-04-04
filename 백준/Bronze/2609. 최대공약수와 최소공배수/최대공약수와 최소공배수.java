@@ -1,15 +1,23 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        String[] list = br.readLine().split(" ");
-        int a = Integer.parseInt(list[0]);
-        int b = Integer.parseInt(list[1]);
+        StringTokenizer st = new StringTokenizer(br.readLine());
         
-        bw.write(String.valueOf(gcd(a, b)) + " " + String.valueOf(lcm(a, b)));
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        
+        int g = gcd(A, B);
+        int l = lcm(A, B);
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(g).append("\n").append(l);
+        
+        bw.write(sb.toString());
         bw.flush();
         bw.close();
     }
