@@ -1,35 +1,48 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine());
         
-        int start = sc.nextInt();
+        String ans = "";
         
-        if (start == 1) {
-            boolean flag = true;
-            
+        int num = Integer.parseInt(st.nextToken());
+        
+        if (num == 1) {
+            boolean pass = true;
             for (int i = 0; i < 7; i++) {
-                int next = sc.nextInt();
+                int newNum = Integer.parseInt(st.nextToken());
                 
-                if (next - 1 != start) flag = false;
-                else start = next;
+                if (num > newNum) {
+                    ans = "mixed";
+                    pass = false;
+                    break;
+                }
+                num = newNum;
             }
             
-            if (flag) System.out.print("ascending");
-            else System.out.print("mixed");
-        } else if (start == 8) {
-            boolean flag = true;
-            
+            if (pass) ans = "ascending";
+        } else if (num == 8) {
+            boolean pass = true;
             for (int i = 0; i < 7; i++) {
-                int next = sc.nextInt();
+                int newNum = Integer.parseInt(st.nextToken());
                 
-                if (next != start - 1) flag = false;
-                else start = next;
+                if (num < newNum) {
+                    ans = "mixed";
+                    pass = false;
+                    break;
+                }
+                num = newNum;
             }
             
-            if (flag) System.out.print("descending");
-            else System.out.print("mixed");
-        } else System.out.print("mixed");
+            if (pass) ans = "descending";
+        } else ans = "mixed";
+        
+        bw.write(ans);
+        bw.flush();
+        bw.close();
     }
 }
