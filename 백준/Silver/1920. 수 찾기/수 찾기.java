@@ -1,46 +1,50 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        
-        int N = Integer.parseInt(br.readLine());
-        Integer[] aList = Arrays.stream(br.readLine().split(" ")).map(Integer::parseInt).toArray(Integer[]::new);
-        
-        int M = Integer.parseInt(br.readLine());
-        Integer[] bList = Arrays.stream(br.readLine().split(" ")).map(Integer::parseInt).toArray(Integer[]::new);
-        
-        Arrays.sort(aList);
-        
         StringBuilder sb = new StringBuilder();
-        
-        for (int i = 0; i < M; i++) {
-            int num = bList[i];
-            
-            if (binarySearch(num, aList)) sb.append(1).append("\n");
-            else sb.append(0).append("\n");
+
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] nList = new int[N];
+        for (int i = 0; i < N; i++) {
+            nList[i] = Integer.parseInt(st.nextToken());
         }
-        
+
+        Arrays.sort(nList);
+        int M = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+
+        for (int m = 0; m < M; m++) {
+            int num = Integer.parseInt(st.nextToken());
+
+            if (biSearch(nList, num)) sb.append(1);
+            else sb.append(0);
+
+            sb.append("\n");
+        }
+
         bw.write(sb.toString());
         bw.flush();
         bw.close();
     }
-    
-    public static boolean binarySearch(int n, Integer[] list) {
+
+    public static boolean biSearch(int[] list, int num) {
         int start = 0;
         int end = list.length - 1;
-        
+
         while (start <= end) {
             int mid = (start + end) / 2;
-            
-            if (list[mid] == n) return true;
-            
-            if (list[mid] < n) start = mid + 1;
+
+            if (list[mid] == num) return true;
+
+            if (list[mid] < num) start = mid + 1;
             else end = mid - 1;
         }
-        
+
         return false;
     }
 }
