@@ -1,40 +1,42 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        int M = sc.nextInt();
-        int N = sc.nextInt();
-        
-        boolean[] isNotPrime = new boolean[N + 1];
-        isNotPrime[1] = true;
-        
-        for (int i = 2; i <= N; i++) {
-            if (isNotPrime[i]) continue;
-            
-            int cnt = 2;
-            while (i * cnt <= N) {
-                int idx = i * cnt++;
-                
-                isNotPrime[idx] = true;
-            }
-        }
+        int M = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
         
         int ans = 0;
         int min = -1;
+        
         for (int i = M; i <= N; i++) {
-            if (!isNotPrime[i]) {
+            if (isPrime(i)) {
                 ans += i;
-                
                 if (min == -1) min = i;
             }
         }
         
-        if (min == -1) System.out.println(min);
+        if (ans == 0) bw.write("-1");
         else {
-            System.out.println(ans);
-            System.out.println(min);
+            StringBuilder sb = new StringBuilder();
+            sb.append(ans).append("\n").append(min);
+            
+            bw.write(sb.toString());
         }
+        
+        bw.flush();
+        bw.close();
+    }
+    
+    public static boolean isPrime(int n) {
+        if (n == 1) return false;
+        
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) return false;
+        }
+        
+        return true;
     }
 }
