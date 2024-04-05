@@ -1,42 +1,51 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        int N = sc.nextInt();
-        
-        int[] orders = new int[N];
-        int[][] record = new int[N][2];
+        int N = Integer.parseInt(br.readLine());
+        int[][] list = new int[N][2];
         
         for (int n = 0; n < N; n++) {
-            int weight = sc.nextInt();
-            int height = sc.nextInt();
+            StringTokenizer st = new StringTokenizer(br.readLine());
             
-            record[n][0] = weight;
-            record[n][1] = height;
+            int weight = Integer.parseInt(st.nextToken());
+            int height = Integer.parseInt(st.nextToken());
+            
+            list[n][0] = weight;
+            list[n][1] = height;
         }
         
+        int[] ans = new int[N];
+        
         for (int i = 0; i < N; i++) {
-            int targetWeight = record[i][0];
-            int targetHeight = record[i][1];
+            int weight = list[i][0];
+            int height = list[i][1];
             
-            int cnt = 1;
+            int order = 1;
             
             for (int k = 0; k < N; k++) {
                 if (i == k) continue;
                 
-                int w = record[k][0];
-                int h = record[k][1];
+                int compWeight = list[k][0];
+                int compHeight = list[k][1];
                 
-                if (targetWeight < w && targetHeight < h) cnt++;
+                if (weight < compWeight && height < compHeight) order++;
             }
             
-            orders[i] = cnt;
+            ans[i] = order;
         }
         
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N; i++) {
-            System.out.printf("%d ", orders[i]);
+            sb.append(ans[i]).append(" ");
         }
+        
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
     }
 }
