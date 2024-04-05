@@ -7,17 +7,13 @@ public class Main {
         
         String str = br.readLine();
         
-        boolean flag = true;
+        int isFal = 1;
+        
         for (int i = 0; i < str.length() / 2; i++) {
-            if (str.charAt(i) != str.charAt(str.length() - 1 - i)) {
-                flag = false;
-                break;
-            }
+            if (str.charAt(i) != str.charAt(str.length() - 1 - i)) isFal = 0;
         }
         
-        if (flag) bw.write("1");
-        else bw.write("0");
-        
+        bw.write(String.valueOf(isFal));
         bw.flush();
         bw.close();
     }
