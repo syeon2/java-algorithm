@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Arrays;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -10,17 +10,15 @@ public class Main {
         for (int i = 0; i < 9; i++) {
             list[i] = Integer.parseInt(br.readLine());
         }
+        StringBuilder sb = new StringBuilder();
+        boolean isQuit = false;
         
         Arrays.sort(list);
         
-        int a = -1;
-        int b = -1;
-        
         for (int i = 0; i < 9; i++) {
-            
             for (int k = i + 1; k < 9; k++) {
-                
                 int sum = 0;
+                
                 for (int j = 0; j < 9; j++) {
                     if (j == i || j == k) continue;
                     
@@ -28,20 +26,18 @@ public class Main {
                 }
                 
                 if (sum == 100) {
-                    a = i;
-                    b = k;
+                    for (int j = 0; j < 9; j++) {
+                        if (i == j || k == j) continue;
+                        
+                        sb.append(list[j]).append("\n");
+                    }
+                    
+                    isQuit = true;
                     break;
                 }
             }
             
-            if ((a != -1 && b != -1)) break;
-        }
-        
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 9; i++) {
-            if (i == a || i == b) continue;
-            
-            sb.append(list[i]).append("\n");
+            if (isQuit) break;
         }
         
         bw.write(sb.toString());
