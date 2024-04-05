@@ -8,8 +8,9 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         
         StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= N / 4; i++) {
+        while (N > 0) {
             sb.append("long ");
+            N -= 4;
         }
         
         sb.append("int");
