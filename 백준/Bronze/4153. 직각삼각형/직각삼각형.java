@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Arrays;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -8,13 +8,22 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         
         while (true) {
-            Integer[] list = Arrays.stream(br.readLine().split(" ")).map(Integer::parseInt).toArray(Integer[]::new);
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+            
+            if (a == 0 && b == 0 && c == 0) break;
+            
+            int[] list = {a, b, c};
             Arrays.sort(list);
             
-            if (list[0] == 0 && list[1] == 0 && list[2] == 0) break;
+            if (list[2] * list[2] == (list[0] * list[0]) + (list[1] * list[1])) {
+                sb.append("right");
+            } else sb.append("wrong");
             
-            if ((list[2] * list[2]) == (list[1] * list[1]) + (list[0] * list[0])) sb.append("right").append("\n");
-            else sb.append("wrong").append("\n");
+            sb.append("\n");
         }
         
         bw.write(sb.toString());
