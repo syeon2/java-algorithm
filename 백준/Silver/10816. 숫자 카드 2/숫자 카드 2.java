@@ -1,78 +1,35 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
         
         int N = Integer.parseInt(br.readLine());
-        int[] aList = new int[N];
-        st = new StringTokenizer(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < N; i++) {
-            aList[i] = Integer.parseInt(st.nextToken());
+            int num = Integer.parseInt(st.nextToken());
+            
+            if (map.get(num) == null) map.put(num, 1);
+            else map.put(num, map.get(num) + 1);
         }
         
         int M = Integer.parseInt(br.readLine());
-        int[] bList = new int[M];
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < M; i++) {
-            bList[i] = Integer.parseInt(st.nextToken());
-        }
         
-        Arrays.sort(aList);
-        StringBuilder sb = new StringBuilder();
-        
-        for (int i = 0; i < M; i++) {
-            int start = lowerBound(bList[i], aList);
-            int end = upperBound(bList[i], aList);
+        for (int m = 0; m < M; m++) {
+            int num = Integer.parseInt(st.nextToken());
             
-            sb.append(end - start).append(" ");
+            if (map.get(num) == null) sb.append("0 ");
+            else sb.append(map.get(num)).append(" ");
         }
         
         bw.write(sb.toString());
         bw.flush();
         bw.close();
-    }
-    
-    public static int upperBound(int value, int[] list) {
-        int start = 0;
-        int end = list.length - 1;
-        
-        int minIdx = list.length;
-        
-        while (start <= end) {
-            int mid = (start + end) / 2;
-            
-            if (list[mid] > value) {
-                end = mid - 1;
-                minIdx = Math.min(minIdx, mid);
-            } else {
-                start = mid + 1;
-            }
-        }
-        
-        return minIdx;
-    }
-    
-    public static int lowerBound(int value, int[] list) {
-        int start = 0;
-        int end = list.length - 1;
-        
-        int minIdx = list.length;
-        
-        while (start <= end) {
-            int mid = (start + end) / 2;
-            
-            if (list[mid] >= value) {
-                end = mid - 1;
-                minIdx = Math.min(minIdx, mid);
-            } else {
-                start = mid + 1;
-            }
-        }
-        
-        return minIdx;
     }
 }
