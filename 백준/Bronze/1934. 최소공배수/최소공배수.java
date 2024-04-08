@@ -1,14 +1,14 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
         
         int N = Integer.parseInt(br.readLine());
         
-        StringBuilder sb = new StringBuilder();
         for (int n = 0; n < N; n++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             
@@ -29,7 +29,6 @@ public class Main {
     
     public static int gcd(int a, int b) {
         if (b == 0) return a;
-        
         return gcd(b, a % b);
     }
 }
