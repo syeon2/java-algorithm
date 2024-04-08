@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main{
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -10,27 +10,25 @@ public class Main{
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
         
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> que = new LinkedList<>();
         for (int i = 1; i <= N; i++) {
-            queue.add(i);
+            que.add(i);
         }
         
         StringBuilder sb = new StringBuilder();
         sb.append("<");
         
-        int cnt = 1;
-        while (queue.size() != 1) {
-            if (cnt == K) {
-                sb.append(queue.remove()).append(", ");
-                
-                cnt = 1;
-            } else {
-                queue.add(queue.remove());
-                cnt++;
+        while (que.size() != 1) {
+            int cnt = K - 1;
+            
+            while (cnt-- > 0) {
+                que.add(que.remove());
             }
+            
+            sb.append(que.remove()).append(", ");
         }
         
-        sb.append(queue.remove()).append(">");
+        sb.append(que.remove()).append(">");
         
         bw.write(sb.toString());
         bw.flush();
