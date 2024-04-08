@@ -8,12 +8,13 @@ public class Main {
         String str = br.readLine();
         
         StringBuilder sb = new StringBuilder();
-        while (str.length() >= 10) {
-            sb.append(str.substring(0, 10)).append("\n");
-            str = str.substring(10);
-        }
         
-        sb.append(str);
+        for (int i = 0; i < str.length(); i += 10) {
+            int start = i;
+            int end = Math.min(str.length(), start + 10);
+            
+            sb.append(str.substring(start, end)).append("\n");
+        }
         
         bw.write(sb.toString());
         bw.flush();
