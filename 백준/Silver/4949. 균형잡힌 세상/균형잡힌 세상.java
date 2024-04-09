@@ -12,30 +12,35 @@ public class Main {
 
             if (str.equals(".")) break;
 
-            boolean ans = true;
-
             Stack<Character> stack = new Stack<>();
 
+            boolean balanced = true;
+
             for (int i = 0; i < str.length(); i++) {
-                if (str.charAt(i) == '(' || str.charAt(i) == '[') {
-                    stack.add(str.charAt(i));
-                } else if (str.charAt(i) == ')') {
-                    if (!stack.isEmpty() && stack.peek() == '(') stack.pop();
-                    else {
-                        ans = false;
+                char c = str.charAt(i);
+
+                if (c == '(' || c == '[') stack.add(c);
+                else if (c == ')') {
+                    if (stack.isEmpty() || stack.peek() == '[') {
+                        balanced = false;
                         break;
                     }
-                } else if (str.charAt(i) == ']') {
-                    if (!stack.isEmpty() && stack.peek() == '[') stack.pop();
-                    else {
-                        ans = false;
+                    else if (stack.peek() == '(') stack.pop();
+                } else if (c == ']') {
+                    if (stack.isEmpty() || stack.peek() == '(') {
+                        balanced = false;
                         break;
                     }
+                    else if (stack.peek() == '[') stack.pop();
                 }
             }
 
-            if (ans && stack.isEmpty()) sb.append("yes").append("\n");
-            else sb.append("no").append("\n");
+            if (!stack.isEmpty()) balanced = false;
+
+            if (balanced) sb.append("yes");
+            else sb.append("no");
+
+            sb.append("\n");
         }
 
         bw.write(sb.toString());
