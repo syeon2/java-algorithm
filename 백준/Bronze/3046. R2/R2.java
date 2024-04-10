@@ -6,12 +6,14 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        StringTokenizer st = new StringTokenizer(br.readLine());
         
-        int r1 = Integer.parseInt(st.nextToken());
-        int s = Integer.parseInt(st.nextToken());
+        int R1 = Integer.parseInt(st.nextToken());
+        int S = Integer.parseInt(st.nextToken());
         
-        bw.write(String.valueOf(2 * s - r1));
+        int R2 = (2 * S) - R1;
+        
+        bw.write(String.valueOf(R2));
         bw.flush();
         bw.close();
     }
