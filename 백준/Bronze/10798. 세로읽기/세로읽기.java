@@ -1,39 +1,33 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        char[][] list = new char[5][16];
+        
+        for (int i = 0; i < 5; i++) {
+            String str = br.readLine();
+            
+            for (int k = 0; k < str.length(); k++) {
+                list[i][k] = str.charAt(k);
+            }
+        }
+        
+        StringBuilder sb = new StringBuilder();
 
-		char[][] list = new char[15][15];
-
-		int y = 0;
-
-		String str;
-		while ((str = br.readLine()) != null) {
-
-			char[] strs = str.toCharArray();
-
-			for (int i = 0; i < strs.length; i++) {
-				list[y][i] = strs[i];
-			}
-
-			y++;
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		for (int k = 0; k < 15; k++) {
-
-			for (int i = 0; i < y; i++) {
-				if (list[i][k] == 0) continue;
-
-				sb.append(list[i][k]);
-			}
-		}
-
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
-	}
+        for (int i = 0; i < 16; i++) {
+            for (int k = 0; k < 5; k++) {
+                if (list[k][i] != 0) {
+                    sb.append(list[k][i]);
+                }
+            }
+        }
+        
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+    }
 }
