@@ -8,16 +8,10 @@ public class Main {
         
         StringTokenizer st = new StringTokenizer(br.readLine());
         
-        int N = Integer.parseInt(st.nextToken()) - 1;
-        int M = Integer.parseInt(st.nextToken()) - 1;
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
         
-        int cnt = M;
-        while (N-- > 0) {
-            cnt++;
-            cnt += M;
-        }
-        
-        bw.write(String.valueOf(cnt));
+        bw.write(String.valueOf(N * M - 1));
         bw.flush();
         bw.close();
     }
