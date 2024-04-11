@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -8,33 +8,36 @@ public class Main {
         
         StringTokenizer st = new StringTokenizer(br.readLine());
         
-        int A = Integer.parseInt(st.nextToken());
-        int B = Integer.parseInt(st.nextToken());
-        int C = Integer.parseInt(st.nextToken());
+        int E = Integer.parseInt(st.nextToken());
+        int S = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
         
-        int aCut = 15;
-        int bCut = 28;
-        int cCut = 19;
+        int eLimit = 15;
+        int sLimit = 28;
+        int mLimit = 19;
         
+        int curY = 1;
         
-        int aN = 1;
-        int bN = 1;
-        int cN = 1;
+        int e = 1;
+        int s = 1;
+        int m = 1;
         
-        int y = 1;
-        
-        while (!(aN == A && bN == B && cN == C)) {
-            y++;
-            aN++;
-            bN++;
-            cN++;
+        while (true) {
+            if (e == E && s == S && m == M) break;
             
-            if (aN > aCut) aN = 1;
-            if (bN > bCut) bN = 1;
-            if (cN > cCut) cN = 1;
+            curY++;
+            
+            e++;
+            if (e > eLimit) e = 1;
+            
+            s++;
+            if (s > sLimit) s = 1;
+            
+            m++;
+            if (m > mLimit) m = 1;
         }
         
-        bw.write(String.valueOf(y));
+        bw.write(String.valueOf(curY));
         bw.flush();
         bw.close();
     }
