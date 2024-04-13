@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -7,21 +7,29 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         StringTokenizer st = new StringTokenizer(br.readLine());
+        
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
         
-        long[] list = new long[N + 1];
+        int[] list = new int[N];
         st = new StringTokenizer(br.readLine());
-        for (int i = 1; i <= N; i++) {
-            list[i] = Integer.parseInt(st.nextToken()) + list[i - 1];
+        for (int i = 0; i < N; i++) {
+            list[i] = Integer.parseInt(st.nextToken());
         }
         
         int ans = 0;
-        for (int i = 1; i <= N; i++) {
+        
+        for (int i = 0; i < N; i++) {
+            int temp = 0;
             
-            for (int k = i; k <= N; k++) {
+            for (int k = i; k < N; k++) {
+                temp += list[k];
                 
-                if (list[k] - list[i - 1] == M) ans++;
+                if (M < temp) break;
+                else if (M == temp) {
+                    ans++;
+                    break;
+                }
             }
         }
         
