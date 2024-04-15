@@ -8,7 +8,7 @@ public class Main {
 
         int N = Integer.parseInt(br.readLine());
 
-        Set<String> set = new HashSet<>();
+        Set<String> set = new TreeSet<>(Collections.reverseOrder());
 
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -20,14 +20,9 @@ public class Main {
             else set.remove(name);
         }
 
-        Queue<String> que = new PriorityQueue<>(Collections.reverseOrder());
-        for (String name : set) {
-            que.add(name);
-        }
-
         StringBuilder sb = new StringBuilder();
-        while (!que.isEmpty()) {
-            sb.append(que.remove()).append("\n");
+        for (String name : set) {
+            sb.append(name).append("\n");
         }
 
         bw.write(sb.toString());
