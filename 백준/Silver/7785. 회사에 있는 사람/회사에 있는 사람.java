@@ -1,40 +1,37 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		Set<String> set = new HashSet<>();
+        int N = Integer.parseInt(br.readLine());
 
-		int N = Integer.parseInt(br.readLine());
+        Set<String> set = new HashSet<>();
 
-		for (int n = 0; n < N; n++) {
-			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-			String name = st.nextToken();
-			String cmd = st.nextToken();
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
-			if (cmd.equals("enter")) set.add(name);
-			else set.remove(name);
-		}
+            String name = st.nextToken();
+            String cmd = st.nextToken();
 
-		StringBuilder sb = new StringBuilder();
-		String[] list = set.toArray(String[]::new);
-		Arrays.sort(list, Collections.reverseOrder());
+            if (cmd.equals("enter")) set.add(name);
+            else set.remove(name);
+        }
 
-		Arrays.stream(list).forEach(str -> sb.append(str).append("\n"));
+        Queue<String> que = new PriorityQueue<>(Collections.reverseOrder());
+        for (String name : set) {
+            que.add(name);
+        }
 
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
+        StringBuilder sb = new StringBuilder();
+        while (!que.isEmpty()) {
+            sb.append(que.remove()).append("\n");
+        }
+
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
     }
 }
