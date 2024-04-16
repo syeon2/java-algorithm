@@ -1,24 +1,25 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Stack;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String str = br.readLine();
-		String[] list = new String[str.length()];
+        String str = br.readLine();
 
-		for (int i = 0; i < list.length; i++) {
-			list[i] = str.substring(i);
-		}
+        Queue<String> que = new PriorityQueue<>();
+        for (int i = 0; i < str.length(); i++) {
+            que.add(str.substring(i));
+        }
 
-		Arrays.sort(list);
+        StringBuilder sb = new StringBuilder();
+        while (!que.isEmpty()) {
+            sb.append(que.remove()).append("\n");
+        }
 
-		Arrays.stream(list).forEach(System.out::println);
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
     }
 }
