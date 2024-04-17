@@ -1,23 +1,22 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		String A = st.nextToken();
-		String B = st.nextToken();
-		String C = st.nextToken();
-		String D = st.nextToken();
-
-		bw.write(String.valueOf(Long.parseLong(A + B) + Long.parseLong(C + D)));
-		bw.flush();
-		bw.close();
+        
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        long a = Integer.parseInt(st.nextToken());
+        long b = Integer.parseInt(st.nextToken());
+        long c = Integer.parseInt(st.nextToken());
+        long d = Integer.parseInt(st.nextToken());
+        
+        long ab = Long.parseLong(a + "" + b);
+        long cd = Long.parseLong(c + "" + d);
+        
+        bw.write(String.valueOf(ab + cd));
+        bw.flush();
+        bw.close();
     }
 }
