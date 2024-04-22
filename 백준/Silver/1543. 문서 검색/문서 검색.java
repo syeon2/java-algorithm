@@ -1,22 +1,31 @@
 import java.io.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String str = br.readLine();
-		String s = br.readLine();
+        String str1 = br.readLine();
+        String str2 = br.readLine();
 
-		int cnt = 0;
+        int ans = 0;
+        int idx = 0;
+        while (idx < str1.length()) {
+            if (idx + str2.length() > str1.length()) break;
 
-		while (str.indexOf(s) != -1) {
-			cnt++;
-			str = str.substring(str.indexOf(s) + 1 + s.length() - 1);
-		}
+            boolean isSame = true;
+            for (int i = 0; i < str2.length(); i++) {
+                if (str1.charAt(i + idx) != str2.charAt(i)) isSame = false;
+            }
 
-		bw.write(String.valueOf(cnt));
-		bw.flush();
-		bw.close();
-	}
+            if (isSame) {
+                ans++;
+                idx += str2.length();
+            } else idx++;
+        }
+
+        bw.write(String.valueOf(ans));
+        bw.flush();
+        bw.close();
+    }
 }
