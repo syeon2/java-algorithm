@@ -30,9 +30,9 @@ public class Main {
         
         int[] country = list[K];
         for (int i = 0; i < N; i++) {
-            if (country[0] > list[i][0]) ans++;
-            else if (country[0] == list[i][0] && country[1] > list[i][1]) ans++;
-            else if (country[0] == list[i][0] && country[1] == list[i][1] && country[2] > list[i][2]) ans++;
+            if (country[0] < list[i][0]) ans++;
+            else if (country[0] == list[i][0] && country[1] < list[i][1]) ans++;
+            else if (country[0] == list[i][0] && country[1] == list[i][1] && country[2] < list[i][2]) ans++;
         }
         
         bw.write(String.valueOf(ans));
